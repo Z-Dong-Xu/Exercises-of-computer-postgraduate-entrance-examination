@@ -1,0 +1,158 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+typedef struct Bigint {
+
+	int data[1000];
+
+	int size;
+
+	void Init()
+	{
+		for(int i=0;i<1000;i++)
+		{
+			data[i]=0;
+		}
+
+		size=0;
+	}
+
+	void set(char S[])
+	{
+		int i ,w ,k;
+
+		int L ,temp;
+
+		L=strlen(S);
+
+		Init();
+
+		w=1;
+
+		k=0;
+
+		temp=0;
+
+		size=0;
+
+		for(i=L-1;i>=0;i--)
+		{
+			temp+=(S[i]-'0')*w;
+
+			w*=10;
+
+			k++;
+
+			if(k==4||i==0)
+			{
+				data[size]=temp;
+
+				size++;
+
+				w=1;
+			
+				k=0;
+
+				temp=0;
+			}
+
+		}
+	}
+
+	void Put()
+	{
+		for(int i=size-1;i>=0;i--)
+		{
+			if(i!=size-1)
+			{
+				printf("%04d",data[i]);
+			}
+			else
+			{
+				printf("%d",data[i]);
+			}
+		}
+		cout<<endl;
+	}
+
+	Bigint operator + (const Bigint &A) const 
+	{
+		Bigint ANS;
+
+		ANS.Init();
+
+		int temp ,carry=0;
+
+		for(int i=0;i<A.size||i<size;i++)
+		{
+			temp=A.data[i]+data[i]+carry;
+
+			carry=temp/10000;
+
+			temp%=10000;
+
+			ANS.data[ANS.size++]=temp;
+		}
+
+		if(carry!=0)
+		{
+			ANS.data[ANS.size++]=carry;
+		}
+
+		return ANS;
+	}
+
+	Bigint operator * ( int &A) const
+	{
+		Bigint ANS;
+
+		ANS.Init();
+
+		int temp ,carry=0;
+
+		for(int i=0;i<size;i++)
+		{
+			temp=A*data[i]+carry;
+
+			carry=temp/10000;
+
+			temp%=10000;
+
+			ANS.data[ANS.size++]=temp;
+		}
+
+		if(carry!=0)
+		{
+			ANS.data[ANS.size++]=carry;
+		}
+
+		return ANS;
+	}
+
+}Bigint;
+
+Bigint A ,B ,C;
+
+char S1[1010] ,S2[1010];
+
+void main ()
+{
+	while(scanf("%s",S1)!=EOF)
+	{
+		scanf("%s",S2);
+
+		A.set(S1);
+
+		B.set(S2);
+
+		C=A+B;
+
+		C.Put();
+	}
+
+}

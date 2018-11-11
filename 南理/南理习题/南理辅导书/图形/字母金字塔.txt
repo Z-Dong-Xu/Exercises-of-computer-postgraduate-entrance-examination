@@ -1,0 +1,27 @@
+#include <iostream.h>
+
+#include <iomanip.h>
+
+void main()
+{
+	int n,i,j; 
+
+	char c='a';
+
+	cout<<"ÊäÈë"<<endl;
+
+	cin>>n;
+
+	for(i=0;i<n;i++)
+	{
+		cout<<setw(n*2-i*2);
+		for(j=0;j<=i;j++)
+		{
+			cout<<c<<setw(4);
+		}
+		c++;
+		cout<<endl;
+	}
+	cout<<endl;
+
+}

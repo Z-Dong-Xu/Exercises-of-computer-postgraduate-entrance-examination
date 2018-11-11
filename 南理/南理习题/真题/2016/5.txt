@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <queue>
+
+using namespace std;
+
+#define MAX 11
+
+typedef struct Node{
+
+	int root;
+
+	int step;
+
+}Node;
+
+queue <Node> Q;
+
+int Flag[MAX];
+
+int map[MAX][MAX];
+
+void main ()
+{
+	int N ,M ,a ,b;
+
+	int i ,Max=1;
+
+	Node temp ,now;
+
+	cin>>N>>M;
+
+	for(i=1;i<N;i++)
+	{
+		cin>>a>>b;
+
+		map[a][b]=1;
+
+		map[b][a]=1;
+	}
+
+	temp.root=M;
+
+	temp.step=0;
+
+	Q.push(temp);
+
+	Flag[temp.root]=1;
+
+	while(Q.empty()==false)
+	{
+		now=Q.front();
+
+		Q.pop();
+
+		if(Max<now.step)
+		{
+			Max=now.step;
+		}
+
+		for(i=1;i<=N;i++)
+		{
+			if(map[now.root][i]==1&&Flag[i]==0)
+			{
+				temp.root=i;
+
+				temp.step=now.step+1;
+
+				Flag[i]=1;
+
+				Q.push(temp);
+
+			}
+		}
+		
+	}
+
+	cout<<Max<<endl;
+
+}

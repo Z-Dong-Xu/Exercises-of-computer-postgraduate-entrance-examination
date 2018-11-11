@@ -1,0 +1,87 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#define MAX 31
+
+void main ()
+{
+	int i ,j ,k ,rear ,flag;
+
+	int  n[MAX] ,m ,temp[MAX][2] ,ex[1][2];
+
+	i=1;
+
+	for(j=0;j<MAX;j++)
+	{
+		temp[j][1]=0;
+	}
+
+	cout<<"ÊäÈëÊý×ÖÐòÁÐ"<<endl;
+
+	while(1)
+	{
+		cin>>m;
+		if(m!=-1)
+		{
+			n[i]=m;
+			i++;
+		}
+		else
+		{
+			break;
+		}
+	}
+	i--;
+
+	rear=0;
+
+	for(j=1;j<=i;j++)
+	{
+		flag=0;
+		for(k=1;k<=rear;k++)
+		{
+			if(n[j]==temp[k][0])
+			{
+				temp[k][1]++;
+				flag=1;
+				break;
+			}
+		}
+		if(flag==0)
+		{
+			rear++;
+			temp[rear][0]=n[j];
+			temp[rear][1]=1;
+		}
+
+	}
+
+	for(j=1;j<=rear;j++)
+	{
+		k=j;
+		for(i=j+1;i<=rear;i++)
+		{
+			if(temp[i][0]<temp[k][0])
+			{
+				k=i;
+			}
+		}
+		ex[0][0]=temp[k][0];
+		ex[0][1]=temp[k][1];
+		temp[k][0]=temp[j][0];
+		temp[k][1]=temp[j][1];
+		temp[j][0]=ex[0][0];
+		temp[j][1]=ex[0][1];
+	}
+	
+	for(j=1;j<=rear;j++)
+	{
+		cout<<temp[j][0]<<"-"<<temp[j][1]<<endl;
+	}	
+
+	
+}
+
+

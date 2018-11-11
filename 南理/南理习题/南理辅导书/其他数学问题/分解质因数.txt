@@ -1,0 +1,40 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+
+#define MAX 100
+
+void main ()
+{
+	int i,count=0;
+
+	int b[MAX];
+
+	long num ,num1=1;
+
+	cout<<"ÊäÈë"<<endl;
+
+	cin>>num;
+
+	cout<<num<<'=';
+
+	while(num>1)
+	{
+		i=2;
+		while(num%i!=0)
+		{
+			i++;
+		}
+		b[count]=i;
+		count++;
+		num/=i;
+	}
+
+	for(i=0;i<count-1;i++)
+	{
+		cout<<b[i]<<'*';
+	}
+	cout<<b[count-1]<<endl;
+}

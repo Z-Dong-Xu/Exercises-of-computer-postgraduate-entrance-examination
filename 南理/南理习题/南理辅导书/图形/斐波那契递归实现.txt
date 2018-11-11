@@ -1,0 +1,42 @@
+#include <iostream.h>
+#include <iomanip.h>
+
+
+int F( int n );
+
+
+void main ()
+{
+	int n, i ,j;
+
+	cout<<"ÊäÈë"<<endl;
+
+	cin>>n;
+
+	for(i=0;i<n;i++)
+	{
+		cout<<setw(4*n-4*i);
+
+		for(j=0;j<=2*i;j++)
+		{
+			cout<<F(j+1)<<setw(4);
+		}
+		cout<<endl;
+	}
+	cout<<endl;
+}
+
+int F( int n )
+{
+	int x;
+
+	if(n==1) x=0;
+	else
+	{
+		if(n==2) x=1;
+
+		else x=F(n-1)+F(n-2);
+
+	}
+	return x;
+}

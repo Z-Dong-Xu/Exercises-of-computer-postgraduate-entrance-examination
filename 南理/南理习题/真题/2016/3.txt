@@ -1,0 +1,98 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+#define MAX 1001
+
+typedef struct Edge{
+
+	int frist;
+
+	int next;
+
+	int W;
+
+}Edge;
+
+vector <Edge> V;
+
+int Tree[MAX];
+
+bool cmp(Edge a ,Edge b)
+{
+	return a.W<b.W;
+}
+
+int fine(int x)
+{
+	if(Tree[x]==-1)
+	{
+		return x;
+	}
+	else
+	{
+		int temp=fine(Tree[x]);
+
+		Tree[x]=temp;
+
+		return temp;
+	}
+}
+void main ()
+{
+	int N ,i ,j;
+
+	int n ,m ,root1 ,root2 ,W;
+
+	Edge temp;
+
+	scanf("%d",&N);
+
+	for(i=1;i<=N;i++)
+	{
+		cin>>n>>m;
+
+		W=0;
+
+		for(j=0;j<=n;j++)
+		{
+			Tree[j]=-1;
+		}
+
+		for(j=1;j<=m;j++)
+		{
+			cin>>temp.frist>>temp.next>>temp.W;
+
+			V.push_back(temp);
+		}
+
+		sort(V.begin() ,V.begin()+m ,cmp);
+
+		for(j=0;j<m;j++)
+		{
+			temp=V[j];
+
+			root1=fine(temp.frist);
+
+			root2=fine(temp.next);
+
+			if(root1==root2)
+			{
+				continue;
+			}
+			else
+			{
+				Tree[root2]=root1;
+
+				W+=temp.W;
+			}
+		}
+
+		cout<<W<<endl;
+	}
+}
+

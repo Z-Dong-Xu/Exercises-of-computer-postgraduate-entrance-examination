@@ -1,0 +1,30 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <string.h>
+
+#define MAX 100
+
+void main ()
+{
+	int i ,n;
+
+	char a[MAX] ,temp;
+
+	cout<<""<<endl;
+
+	cin>>a;
+
+	n=strlen(a);
+
+	for(i=0;i<=(n-1)/2;i++)
+	{
+		temp=a[i];
+
+		a[i]=a[n-i-1];
+
+		a[n-i-1]=temp;
+	}
+
+	cout<<a<<endl;
+}
+

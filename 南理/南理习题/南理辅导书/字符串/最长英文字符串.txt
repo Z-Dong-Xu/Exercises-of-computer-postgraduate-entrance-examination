@@ -1,0 +1,48 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <string.h>
+
+#define MAX 100
+
+void main ()
+{
+	char str[MAX] ,key[MAX] ,temp[MAX];
+
+	int num ,i ,j ,ls;
+
+	num=0;
+
+	cout<<"输入字符串"<<endl;
+
+	cin>>str;
+
+	ls=strlen(str);
+
+	for(i=0;i<ls;i++)
+	{
+		if((str[i]>='A'&&str[i]<='Z')||(str[i]>='a'&&str[i]<='z'))
+		{
+			j=0;
+			while(str[i+j]!=NULL)
+			{
+				temp[j]=str[i+j];
+				j++;
+				if(!((str[i+j]>='A'&&str[i+j]<='Z')||(str[i+j]>='a'&&str[i+j]<='z')))
+				{
+					temp[j]='\0';
+					if(j>num)
+					{
+						num=j;
+						strcpy(key,temp);
+					}
+					break;
+				}
+			}
+		}
+	}
+
+	cout<<"最长英文字符串为："<<key<<endl<<"长度："<<num<<endl;
+
+
+	
+}

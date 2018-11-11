@@ -1,0 +1,91 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <stdio.h>
+
+#define MAX 100
+
+int table[100][2];
+
+int can[MAX];
+
+int fine(int time ,int num)
+{
+	int i ,min;
+
+	for(i=0;i<num;i++)
+	{
+		if(table[i][0]>=time)
+		{
+			min=i;
+			break;
+		}
+	}
+
+	for(i=min;i<num;i++)
+	{
+		if(table[i][0]>=time)
+		{
+			if(table[i][1]<table[min][1])
+			{
+				min=i;
+			}
+		}
+		
+	}
+
+	return min;
+}
+
+void main ()
+{
+	int n ,i ,count=0 ,time=0 ,next ,max=0;
+
+	cout<<"输入个数"<<endl;
+
+	cin>>n;
+
+	for(i=0;i<n;i++)
+	{
+		cout<<"输入开始时间，结束时间"<<endl;
+
+		cin>>table[i][0]>>table[i][1];
+	}
+
+	for(i=0;i<n;i++)
+	{
+		if(table[i][0]>max)
+		{
+			max=table[i][0];
+		}
+	}
+
+	while(time<=max)
+	{
+		next=fine(time ,n);
+
+		can[count]=next;
+		
+		time=table[next][1];
+
+		count++;
+	}
+
+	cout<<count<<endl;
+
+	for(i=0;i<count;i++)
+	{
+		cout<<can[i]+1<<setw(8);
+	}
+	cout<<endl;
+}
+
+
+/*
+	本次积累的经验
+	（1）贪心思想，每一步都选择当前最优，最后的结果可能是全局最优，至少是近似的全局最优
+
+	（2）节目的起始时间可以构造节目结构体也可以用二维数组
+
+
+
+  */

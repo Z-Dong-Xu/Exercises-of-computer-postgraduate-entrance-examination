@@ -1,0 +1,86 @@
+
+#include <stdio.h>
+#include <iomanip.h>
+#include <iostream.h>
+#include <math.h>
+#include <vector>
+
+using namespace std;
+
+#define MAX 100001
+
+int Su[MAX];
+
+int Flag[MAX];
+
+int S(int n)
+{
+	int i ,flag=1 ,temp;
+
+	temp=sqrt(n)+1;
+
+	for(i=2;i<temp;i++)
+	{
+		if(n%i==0)
+		{
+			flag=0;
+
+			break;
+		}
+	}
+
+	return flag;
+}
+
+void main ()
+{
+	long Num ,i ,j ,count=0;
+
+	int ans;
+
+	for(i=2;i<=100000;i++)
+	{
+		if(Flag[i]==0&&S(i)==1)
+		{
+			count++;
+
+			Flag[i]=1;
+
+			Su[count]=i;
+
+			for(j=2;;j++)
+			{
+				if(i*j<=MAX)
+				{
+					Flag[i*j]=-1;
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+	}
+
+	while(scanf("%ld",&Num)!=EOF)
+	{
+		ans=0;
+
+		while(Num>1)
+		{
+			for(i=1;i<=count;i++)
+			{
+				if(Num%Su[i]==0)
+				{
+					Num/=Su[i];
+
+					ans++;
+
+					break;
+				}
+			}
+		}
+
+		cout<<ans<<endl;
+	}
+}

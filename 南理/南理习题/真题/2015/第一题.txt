@@ -1,0 +1,26 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <string.h>
+
+#define MAX 100
+
+void main ()
+{
+	char s[MAX];
+
+	int sum=0 ,n ,i;
+
+	cout<<""<<endl;
+
+	cin>>s;
+
+	n=strlen(s);
+
+	for(i=0;i<n;i++)
+	{
+		sum+=(s[i]-48);
+	}
+
+	cout<<sum<<endl;
+
+}

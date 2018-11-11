@@ -1,0 +1,44 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <math.h>
+
+int C(int num);
+
+void main ()
+{
+	int m ,n ,i;
+
+	cout<<"输入下限，上限"<<endl;
+
+	cin>>m>>n;
+
+	for(i=m;i<=n;i++)
+	{
+		if(i%3==0)
+		{
+			if(C(i)==1)
+			{
+				cout<<setw(8)<<i;
+			}
+		}
+	}
+	cout<<endl;
+}
+
+int C(int num)
+{
+	int i ,j;
+	i=(int)(log10(num)+1);
+	for(j=1;j<=i;j++)
+	{
+		if(num%10==5)
+		{
+			return 1;
+		}
+		else
+		{
+			num/=10;
+		}
+	}
+	return 0;
+}

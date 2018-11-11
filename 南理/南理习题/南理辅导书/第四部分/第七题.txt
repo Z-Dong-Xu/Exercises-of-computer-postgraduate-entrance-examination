@@ -1,0 +1,111 @@
+/////////////////////链表实现
+#include <iostream.h>
+#include <iomanip.h>
+#include <stdlib.h>
+
+typedef struct Node{
+	int num;
+	struct Node *next;
+}Node ,*Qptr;
+
+typedef struct{
+	Qptr front;
+	Qptr rear;
+}Link;
+
+void main ()
+{
+	int num ,i , j,n;
+
+	Node head;
+
+	Qptr temp;
+
+	Link L;
+
+	L.front= &head;
+
+	L.rear=&head;
+
+	cout<<""<<endl;
+
+	cin>>num;
+
+	head.num=num*num;
+
+	head.next=&head;
+
+	for(i=num-1;i>=1;i--)
+	{
+		n=i*i;
+
+		temp=(Qptr)malloc(sizeof(Node));
+
+		temp->num=n;
+		
+		L.rear->next=temp;
+
+		temp->next=L.front;
+
+		L.rear=temp;
+	}
+	temp=&head;
+	for(i=1;i<=num;i++)
+	{
+		
+
+		for(j=1;j<=num;j++)
+		{
+			n=temp->num;
+
+			temp=temp->next;
+
+			cout<<setw(8)<<n;
+		}
+		cout<<endl;
+		temp=temp->next;
+	}
+}
+
+/////////下面为数组实现法
+
+#include <iostream.h>
+#include <iomanip.h>
+
+
+void main ()
+{
+	int num ,i ,j ,a[100] ,b[100];
+
+	a[0]=0;
+
+	cout<<"输入"<<endl;
+
+	cin>>num;
+
+	for(i=1;i<=num;i++)
+	{
+		b[i]=i;
+	}
+
+	for(i=num+1;i<2*num;i++)
+	{
+		b[i]=i-num;
+	}
+
+	for(i=1;i<=num;i++)
+	{
+		a[i]=(num-i+1)*(num-i+1);
+	}
+
+
+	for(i=1;i<=num;i++)
+	{
+		for(j=1;j<=num;j++)
+		{
+			cout<<setw(8)<<a[b[j+i-1]];
+		}
+		cout<<endl;
+	}
+}
+

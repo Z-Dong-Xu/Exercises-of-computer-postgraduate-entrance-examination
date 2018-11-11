@@ -1,0 +1,95 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+typedef struct student{
+
+	char num[20];
+
+	char name[20];
+
+	char sex[10];
+
+	int old;
+
+}student;
+
+bool cmp(student a ,student b)
+{
+	return strcmp(a.num ,b.num)<0;
+}
+
+vector <student> V;
+
+char Str[10][20];
+
+void main ()
+{
+	int N ,M;
+
+	int i ,top ,base ,mid ,t ,flag;
+
+	student temp;
+
+	scanf("%d",&N);
+
+	for(i=1;i<=N;i++)
+	{
+		cin>>temp.num>>temp.name>>temp.sex>>temp.old;
+
+		V.push_back(temp);
+	}
+
+	sort(V.begin() ,V.begin()+N-1 ,cmp);
+
+	scanf("%d",&M);
+
+	for(i=1;i<=M;i++)
+	{
+		cin>>Str[i];
+	}
+
+	for(i=1;i<=M;i++)
+	{
+		top=N-1;
+		base=0;
+
+		while(base<=top)
+		{
+			mid=(top+base)/2;
+
+			flag=0;
+
+			if(t=strcmp(V[mid].num ,Str[i])==0)
+			{
+				cout<<V[mid].num<<setw(4)<<V[mid].name<<setw(4)<<V[mid].sex<<setw(4)<<V[mid].old<<endl;
+
+				flag=1;
+
+				break;
+			}
+			else
+			{
+				if(t<0)
+				{
+					base=mid+1;
+				}
+				else
+				{
+					top=mid-1;
+				}
+			}
+
+		}
+
+		if(flag==0)
+		{
+			cout<<"ERROR"<<endl;
+		}
+	}
+}

@@ -1,0 +1,40 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <stdlib.h>
+
+int Step=0;
+
+void Move(int num ,char Start ,char Temp ,char Goal)
+{
+	if(num>1)
+
+	{
+		Move(num-1 ,Start ,Goal ,Temp);
+
+		Move(1 ,Start ,Temp ,Goal);
+		
+		Move(num-1 ,Temp ,Start ,Goal);
+	}
+	else
+
+	{
+		Step++;
+		cout<<"第"<<Step<<"步"<<":";
+		cout<<Start<<"->"<<Goal<<endl;
+	}
+}
+
+void main ()
+{
+	int num;
+
+	cout<<"输入层数"<<endl;
+
+	cin>>num;
+
+	Move(num ,'1' ,'2' ,'3');
+
+	cout<<endl;
+
+	cout<<"一共"<<Step<<"步"<<endl;
+}

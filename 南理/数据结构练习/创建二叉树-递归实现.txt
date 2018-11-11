@@ -1,0 +1,66 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#define Elemtype char
+
+typedef struct BiTNode{
+
+	Elemtype data;
+
+	struct BiTNode * lchild;
+
+	struct BiTNode * rchild;
+
+}BiTNode;
+
+BiTNode * CreateBiTree()				//创建二叉树
+{
+
+	BiTNode *t;
+
+	t=(BiTNode *)malloc(sizeof(BiTNode));
+
+	Elemtype n;
+
+	n=getchar();
+
+	if(n!=' ')
+	{
+		t->data=n;
+
+		t->lchild=CreateBiTree();
+
+		t->rchild=CreateBiTree();
+
+		return t;
+	}
+	else
+	{
+		return NULL;
+	}
+}
+
+void PreOrder(BiTNode *t)
+{
+	if(t!=NULL)
+	{
+		PreOrder(t->lchild);			//中序遍历
+		cout<<t->data<<setw(4);
+		PreOrder(t->rchild);
+	}
+}
+
+void main ()
+{
+	BiTNode *T;
+
+	cout<<"输入"<<endl;
+
+	T=CreateBiTree();
+	
+	PreOrder(T);
+
+	cout<<endl; 
+}

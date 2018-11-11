@@ -1,0 +1,48 @@
+#include <iostream.h>
+
+#include <iomanip.h>
+
+void fun(int a[][100],int n);
+
+void main()
+{
+
+	int n,i,j;
+
+	int array[100][100];
+
+	cout<<"ÊäÈë"<<endl;
+
+	cin>>n;
+
+	fun(array,n);
+
+	for(i=0;i<n;i++)
+	{
+		cout<<setw(2*n-i*2);
+		for(j=0;j<=i;j++)
+		{
+			cout<<array[i][j]<<setw(4);
+		}
+		cout<<endl;
+	}
+	cout<<endl;
+
+}
+
+void fun(int a[][100],int n)
+{
+	int i,j;
+	for(i=0;i<n;i++)
+	{
+		a[i][i]=1;
+		a[i][0]=1;
+	}
+	for(i=1;i<n;i++)
+	{
+		for(j=1;j<i;j++)
+		{
+			a[i][j]=a[i-1][j-1]+a[i-1][j];
+		}
+	}
+}

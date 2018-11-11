@@ -1,0 +1,504 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <queue>
+#include <vector>
+
+using namespace std;
+
+#define MAX 11
+
+typedef struct Node{
+
+	float S;
+
+	float N;
+
+	float M;
+
+	int T;
+
+	bool operator == (const Node &b) const
+	{
+		if(S==b.S&&N==b.N&&M==b.M)
+		{
+			return true;
+		}
+		else
+			return false;
+	}
+
+}Node;
+
+queue <Node> Q;
+
+vector <Node> V;
+
+
+
+void main ()
+{
+	int i;
+
+	float s ,n ,m;
+
+	bool flag ,FLAG;
+
+	Node temp ,Goal1 ,Goal2 ,Goal3 ,NewP;
+
+	while(scanf("%f",&s)!=EOF)
+	{
+		scanf("%f%f",&n ,&m);
+
+		if(s==0&&n==0&&m==0)
+		{
+			break;
+		}
+
+		while(Q.empty()!=1)
+		{
+			Q.pop();
+		}
+		while(V.empty()!=1)
+		{
+			V.pop_back();
+		}
+
+		NewP.S=s;
+
+		NewP.N=0;
+
+		NewP.M=0;
+
+		NewP.T=0;
+
+		Q.push(NewP);
+
+		V.push_back(NewP);
+
+		FLAG=false;
+
+		Goal1.S=s/2;
+		Goal1.M=s/2;
+		Goal1.N=0;
+
+		Goal2.S=s/2;
+		Goal2.M=0;
+		Goal2.N=s/2;
+
+		Goal3.S=0;
+		Goal3.M=s/2;
+		Goal3.N=s/2;
+
+		while(1)
+		{
+			if(NewP.S>=n-NewP.N)								//s->n
+			{
+				temp.S=NewP.S-(n-NewP.N);
+				temp.N=n;
+				temp.M=NewP.M;
+				temp.T=NewP.T+1;
+
+				if(temp==Goal1||temp==Goal2||temp==Goal3)
+				{
+					FLAG=true;
+					break;
+				}
+
+				flag=true;
+
+				for(i=0;i<V.size();i++)
+				{
+					if(V[i]==temp)
+					{
+						flag=false;
+						break;
+					}
+				}
+				
+				if(flag==true)
+				{
+					Q.push(temp);
+
+					V.push_back(temp);
+				}
+			}
+			else
+			{
+				temp.S=0;
+				temp.N=NewP.N+NewP.S;
+				temp.M=NewP.M;
+				temp.T=NewP.T+1;
+
+				if(temp==Goal1||temp==Goal2||temp==Goal3)
+				{
+					FLAG=true;
+					break;
+				}
+
+				flag=true;
+
+				for(i=0;i<V.size();i++)
+				{
+					if(V[i]==temp)
+					{
+						flag=false;
+						break;
+					}
+				}
+				
+				if(flag==true)
+				{
+					Q.push(temp);
+
+					V.push_back(temp);
+				}
+
+			}
+
+			if(NewP.S>=m-NewP.M)								//s->m
+			{
+				temp.S=NewP.S-(m-NewP.M);
+				temp.N=NewP.N;
+				temp.M=m;
+				temp.T=NewP.T+1;
+
+				if(temp==Goal1||temp==Goal2||temp==Goal3)
+				{
+					FLAG=true;
+					break;
+				}
+
+				flag=true;
+
+				for(i=0;i<V.size();i++)
+				{
+					if(V[i]==temp)
+					{
+						flag=false;
+						break;
+					}
+				}
+				
+				if(flag==true)
+				{
+					Q.push(temp);
+
+					V.push_back(temp);
+				}
+			}
+			else
+			{
+				temp.S=0;
+				temp.N=NewP.N;
+				temp.M=NewP.M+NewP.S;
+				temp.T=NewP.T+1;
+
+				if(temp==Goal1||temp==Goal2||temp==Goal3)
+				{
+					FLAG=true;
+					break;
+				}
+
+				flag=true;
+
+				for(i=0;i<V.size();i++)
+				{
+					if(V[i]==temp)
+					{
+						flag=false;
+						break;
+					}
+				}
+				
+				if(flag==true)
+				{
+					Q.push(temp);
+
+					V.push_back(temp);
+				}
+
+			}
+
+			if(NewP.N>=m-NewP.M)								//n->m
+			{
+				temp.N=NewP.N-(m-NewP.M);
+				temp.S=NewP.S;
+				temp.M=m;
+				temp.T=NewP.T+1;
+
+				if(temp==Goal1||temp==Goal2||temp==Goal3)
+				{
+					FLAG=true;
+					break;
+				}
+
+				flag=true;
+
+				for(i=0;i<V.size();i++)
+				{
+					if(V[i]==temp)
+					{
+						flag=false;
+						break;
+					}
+				}
+				
+				if(flag==true)
+				{
+					Q.push(temp);
+
+					V.push_back(temp);
+				}
+			}
+			else
+			{
+				temp.N=0;
+				temp.S=NewP.S;
+				temp.M=NewP.M+NewP.N;
+				temp.T=NewP.T+1;
+
+				if(temp==Goal1||temp==Goal2||temp==Goal3)
+				{
+					FLAG=true;
+					break;
+				}
+
+				flag=true;
+
+				for(i=0;i<V.size();i++)
+				{
+					if(V[i]==temp)
+					{
+						flag=false;
+						break;
+					}
+				}
+				
+				if(flag==true)
+				{
+					Q.push(temp);
+
+					V.push_back(temp);
+				}
+
+			}
+
+			if(NewP.N>=s-NewP.S)								//n->s
+			{
+				temp.N=NewP.N-(s-NewP.S);
+				temp.M=NewP.M;
+				temp.S=s;
+				temp.T=NewP.T+1;
+
+				if(temp==Goal1||temp==Goal2||temp==Goal3)
+				{
+					FLAG=true;
+					break;
+				}
+
+				flag=true;
+
+				for(i=0;i<V.size();i++)
+				{
+					if(V[i]==temp)
+					{
+						flag=false;
+						break;
+					}
+				}
+				
+				if(flag==true)
+				{
+					Q.push(temp);
+
+					V.push_back(temp);
+				}
+			}
+			else
+			{
+				temp.N=0;
+				temp.M=NewP.M;
+				temp.S=NewP.S+NewP.N;
+				temp.T=NewP.T+1;
+
+				if(temp==Goal1||temp==Goal2||temp==Goal3)
+				{
+					FLAG=true;
+					break;
+				}
+
+				flag=true;
+
+				for(i=0;i<V.size();i++)
+				{
+					if(V[i]==temp)
+					{
+						flag=false;
+						break;
+					}
+				}
+				
+				if(flag==true)
+				{
+					Q.push(temp);
+
+					V.push_back(temp);
+				}
+
+			}
+
+			if(NewP.M>=s-NewP.S)								//m->s
+			{
+				temp.M=NewP.M-(s-NewP.S);
+				temp.N=NewP.N;
+				temp.S=s;
+				temp.T=NewP.T+1;
+
+				if(temp==Goal1||temp==Goal2||temp==Goal3)
+				{
+					FLAG=true;
+					break;
+				}
+
+				flag=true;
+
+				for(i=0;i<V.size();i++)
+				{
+					if(V[i]==temp)
+					{
+						flag=false;
+						break;
+					}
+				}
+				
+				if(flag==true)
+				{
+					Q.push(temp);
+
+					V.push_back(temp);
+				}
+			}
+			else
+			{
+				temp.M=0;
+				temp.N=NewP.N;
+				temp.S=NewP.S+NewP.M;
+				temp.T=NewP.T+1;
+
+				if(temp==Goal1||temp==Goal2||temp==Goal3)
+				{
+					FLAG=true;
+					break;
+				}
+
+				flag=true;
+
+				for(i=0;i<V.size();i++)
+				{
+					if(V[i]==temp)
+					{
+						flag=false;
+						break;
+					}
+				}
+				
+				if(flag==true)
+				{
+					Q.push(temp);
+
+					V.push_back(temp);
+				}
+
+			}
+
+			if(NewP.M>=n-NewP.N)								//m->n
+			{
+				temp.M=NewP.M-(n-NewP.N);
+				temp.S=NewP.S;
+				temp.N=n;
+				temp.T=NewP.T+1;
+
+				if(temp==Goal1||temp==Goal2||temp==Goal3)
+				{
+					FLAG=true;
+					break;
+				}
+
+				flag=true;
+
+				for(i=0;i<V.size();i++)
+				{
+					if(V[i]==temp)
+					{
+						flag=false;
+						break;
+					}
+				}
+				
+				if(flag==true)
+				{
+					Q.push(temp);
+
+					V.push_back(temp);
+				}
+			}
+			else
+			{
+				temp.M=0;
+				temp.S=NewP.S;
+				temp.N=NewP.N+NewP.M;
+				temp.T=NewP.T+1;
+
+				if(temp==Goal1||temp==Goal2||temp==Goal3)
+				{
+					FLAG=true;
+					break;
+				}
+
+				flag=true;
+
+				for(i=0;i<V.size();i++)
+				{
+					if(V[i]==temp)
+					{
+						flag=false;
+						break;
+					}
+				}
+				
+				if(flag==true)
+				{
+					Q.push(temp);
+
+					V.push_back(temp);
+				}
+
+			}
+
+			if(Q.empty()!=1)
+			{
+				NewP=Q.front();
+
+				Q.pop();
+			}
+			else
+			{
+				break;
+			}
+			
+		}
+
+		if(FLAG==true)
+		{
+			cout<<temp.T<<endl;
+		}
+		else
+		{
+			cout<<"ERROR"<<endl;
+		}
+
+
+	}
+}
+

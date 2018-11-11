@@ -1,0 +1,96 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+typedef struct student{
+
+	char num[20];
+
+	char name[20];
+
+	char sex[10];
+
+	int old;
+
+}student;
+
+bool cmp(student a ,student b)
+{
+	int temp;
+
+	temp=strcmp(a.num ,b.num);
+
+	return temp<0; 
+}
+
+student Table[10];
+
+char read[11][20];
+
+void main ()
+{
+	int N ,M ,i;
+
+	int top ,base ,mid ,t ,flag;
+
+	scanf("%d",&N);
+
+	for(i=0;i<N;i++)
+	{
+		cin>>Table[i].num>>Table[i].name>>Table[i].sex>>Table[i].old;
+	}
+
+	sort(Table ,Table+N-1 ,cmp);
+
+	scanf("%d",&M);
+
+	for(i=1;i<=M;i++)
+	{
+		cin>>read[i];
+	}
+
+	for(i=1;i<=M;i++)
+	{
+		top=N-1;
+
+		base=0;
+
+		flag=-1;
+
+		while(top>=base)
+		{
+			mid=(top+base)/2;
+			
+			if(t=strcmp(Table[mid].num ,read[i])==0)
+			{
+				flag=mid;
+
+				break;
+			}
+			else
+			{
+				if(t<0)
+				{
+					base=mid+1;
+				}
+				else
+				{
+					top=mid-1;
+				}
+			}
+		}
+		if(flag==-1)
+		{
+			cout<<"ERROR"<<endl;
+		}
+		else
+		{
+			cout<<Table[flag].num<<setw(4)<<Table[flag].name<<setw(4)<<Table[flag].sex<<setw(4)<<Table[flag].old<<endl;
+		}
+	}
+
+}

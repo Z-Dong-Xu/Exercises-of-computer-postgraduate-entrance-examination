@@ -1,0 +1,94 @@
+#include <stdio.h>
+#include <iomanip.h>
+#include <iostream.h>
+#include <algorithm>
+#include <stack>
+
+using namespace std;
+
+#define Dmax 101
+#define Tmax 201
+
+typedef struct Node{
+
+	int Time;
+
+	int Value;
+
+}Node;
+
+bool cmp(Node a ,Node b)
+{
+	return a.Time<b.Time;
+}
+
+int Max(int a ,int b ,int c)
+{
+	int max;
+
+	max=a;
+
+	if(b>max)
+	{
+		max=b;
+	}
+	if(c>max)
+	{
+		max=c;
+	}
+
+	return max;
+
+}
+
+Node Dtable[Dmax];
+
+int Atable[Dmax][Tmax];
+
+void main ()
+{
+	int T ,N;
+	
+	int i ,j ,temp;
+	while(scanf("%d",&T)!=EOF)
+	{
+		scanf("%d",&N);
+
+		for(i=1;i<=N;i++)
+		{
+			cin>>Dtable[i].Time>>Dtable[i].Value;
+		}
+
+		for(i=0;i<=N;i++)
+		{
+			for(j=0;j<=T;j++)
+			{
+				Atable[i][j]=0;
+			}
+		}
+
+		sort(Dtable+1 ,Dtable+1+N ,cmp);
+
+		for(i=1;i<=N;i++)
+		{
+			for(j=1;j<=T;j++)
+			{
+				if(j>=Dtable[i].Time)
+				{
+					temp=Dtable[i].Value+Atable[i-1][j-Dtable[i].Time];
+
+					Atable[i][j]=Max(temp ,Atable[i][j-1] ,Atable[i-1][j]);
+
+				}
+				else
+				{
+					Atable[i][j]=Atable[i-1][j];
+				}
+
+			}
+
+		}
+		
+		cout<<Atable[N][T]<<endl;
+	}
+}

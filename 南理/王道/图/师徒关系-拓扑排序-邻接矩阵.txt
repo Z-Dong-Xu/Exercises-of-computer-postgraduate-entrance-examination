@@ -1,0 +1,141 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <queue>
+
+using namespace std;
+
+#define MAX 11
+
+queue <int> Q;
+
+int Table[MAX][MAX];
+
+int IfRoot(int x ,int n)
+{
+	int i ,flag=1;
+
+	for(i=0;i<n;i++)
+	{
+		if(Table[i][x]!=0)
+		{
+			flag=0;
+			break;
+		}
+	}
+	return flag;
+}
+
+void main ()
+{
+	int n ,m ,i ,j ,k ,flag;
+
+	int A ,B ,New;
+
+	while(scanf("%d",&n)!=EOF)
+	{
+		scanf("%d",&m);
+
+		for(i=0;i<n;i++)						///////
+		{
+			for(j=0;j<n;j++)
+			{
+				Table[i][j]=0;
+			}
+		}
+
+		while(Q.empty()!=true)					//////
+		{
+			Q.pop();
+		}
+
+		if(n==0&&m==0)
+		{
+			break;
+		}
+
+		for(i=1;i<=m;i++)
+		{
+			cin>>A>>B;
+
+			Table[A][B]=1;
+		}
+
+		for(i=1;i<=n;i++)
+		{
+			flag=0;
+
+			for(j=0;j<n;j++)
+			{
+				if(IfRoot(j ,n)==1)
+				{
+					Q.push(j);
+					flag=1;
+				}
+			}
+			if(flag==0&&Q.empty()==true)			//////Q.empty()==true这句带不带都可以，而且本题也不需要用队列
+			{
+				cout<<"NO"<<endl;
+
+				break;
+			}
+
+			New=Q.front();
+
+			Q.pop();
+
+			for(k=0;k<n;k++)
+			{
+				Table[New][k]=0;
+			}
+			for(k=0;k<n;k++)
+			{
+				Table[k][New]=-1;
+			}
+		}
+		if(flag==1)
+		{
+			cout<<"YES"<<endl;
+		}
+	}
+}
+
+
+
+
+
+/*
+		师徒关系-拓扑排序
+		（1）												注意每次都要初始化，清空上一次的数据
+			for(i=0;i<n;i++)					
+			{
+			for(j=0;j<n;j++)
+			{
+				Table[i][j]=0;
+			}
+			}
+
+			while(Q.empty()!=true)				
+			{
+				Q.pop();
+			}
+
+		（2）
+			if(flag==0&&Q.empty()==true)					本次扫描没有入度为0的且队列里也没有
+			{
+				cout<<"NO"<<endl;
+
+				break;
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+  */

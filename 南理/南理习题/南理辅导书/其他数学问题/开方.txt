@@ -1,0 +1,30 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <math.h>
+
+void main ()
+{
+	float num ,num1 , num2 ,count=1;
+
+	cout<<""<<endl;
+
+	cin>>num;
+
+	num1=num/2;
+
+	num2=num;
+
+	while(fabs(num2-num1)>0.0000001)
+	{
+		num2=num1;
+		count++;
+		num1=(num1+num/num1)/2;
+		
+	}
+
+	cout<<num1<<endl;
+
+	cout<<count<<endl;
+
+	
+}

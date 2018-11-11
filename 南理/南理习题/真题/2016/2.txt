@@ -1,0 +1,112 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <string>
+#include <stack>
+
+using namespace std;
+
+#define MAX 11
+
+char Str[7][MAX];
+
+stack <char> S;
+
+void main ()
+{
+	int i ,j;
+
+	int L;
+
+	char temp;
+
+	for(i=1;i<=6;i++)
+	{
+		cin>>Str[i];
+	}
+
+	for(i=1;i<=6;i++)
+	{
+		while(S.empty()!=1)
+		{
+			S.pop();
+		}
+
+		L=strlen(Str[i]);
+
+		for(j=0;j<L;j++)
+		{
+			if(Str[i][j]=='('||Str[i][j]=='['||Str[i][j]=='{'||Str[i][j]=='<')
+			{
+				S.push(Str[i][j]);
+			}
+			else
+			{
+				if(S.empty()==1)
+				{
+					S.push(Str[i][j]);
+					break;
+				}
+
+				temp=S.top();
+
+				if(Str[i][j]==')')
+				{
+					if(temp=='(')
+					{
+						S.pop();
+					}
+					else
+					{
+						break;
+					}
+				}
+
+				if(Str[i][j]=='}')
+				{
+					if(temp=='{')
+					{
+						S.pop();
+					}
+					else
+					{
+						break;
+					}
+				}
+
+				if(Str[i][j]==']')
+				{
+					if(temp=='[')
+					{
+						S.pop();
+					}
+					else
+					{
+						break;
+					}
+				}
+
+				if(Str[i][j]=='>')
+				{
+					if(temp=='<')
+					{
+						S.pop();
+					}
+					else
+					{
+						break;
+					}
+				}
+			}
+		}
+
+		if(S.empty()==true)
+		{
+			cout<<"YES"<<endl;
+		}
+		else
+		{
+			cout<<"NO"<<endl;
+		}
+	}
+}

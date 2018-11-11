@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <vector>
+
+using namespace std;
+
+#define MAX 100
+
+long Com(int a ,int b)
+{
+	long temp;
+
+	while(b!=0)
+	{
+		temp=a%b;
+
+		a=b;
+
+		b=temp;
+	}
+
+	return a;
+
+}
+
+void main ()
+{
+	int A ,B;
+
+	long temp;
+
+	while(scanf("%d",&A)!=EOF)
+	{
+		scanf("%d",&B);
+
+		temp=Com(A ,B);
+
+		temp=(A*B)/temp;
+
+		cout<<temp<<endl;
+	}
+}

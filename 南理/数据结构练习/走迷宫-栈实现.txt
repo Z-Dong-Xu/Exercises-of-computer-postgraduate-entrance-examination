@@ -1,0 +1,210 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <stdlib.h>
+
+#define MAX 100
+
+int maze[10][10]={
+	{1,1,1,1,1,1,1,1,1,1},
+	{1,0,0,1,0,0,0,1,0,1},
+	{1,0,0,1,0,0,0,1,0,1},
+	{1,0,0,0,0,1,1,0,0,1},
+	{1,0,1,1,1,0,0,0,0,1},
+	{1,0,0,0,1,0,0,0,0,1},
+	{1,0,1,0,0,0,1,0,0,1},
+	{1,0,1,1,1,0,1,1,0,1},
+	{1,1,0,0,0,0,0,0,0,1},
+	{1,1,1,1,1,1,1,1,1,1},
+};
+
+typedef struct Node{
+
+	int X;
+
+	int Y;
+}Node ;
+
+typedef struct Stack{
+
+	 Node * top;
+
+	 Node * bottom;
+
+	 int size;
+
+}SStack;
+
+void InitStack(SStack &S)
+{
+	S.bottom=(Node *)malloc(MAX*sizeof(Node));
+
+	S.top=S.bottom;
+
+	S.size=MAX;
+}
+
+Node Gettop(SStack S)
+{
+	Node n;
+
+	n=*(S.top-1);
+
+	return n;
+}
+
+void Push(SStack &S,Node n)
+{
+	*(S.top)=n;
+
+	S.top++;
+
+	if(S.top-S.bottom>MAX)
+	{
+		cout<<"栈溢出"<<endl;
+	}
+}
+
+Node Pop(SStack &S)
+{
+	Node n;
+
+	S.top--;
+
+	n=*(S.top);
+
+	return n;
+}
+
+void Fine(SStack &S ,Node Bagin ,Node Stop)
+{
+	int step ,x, y;
+
+	Node temp;
+	
+	Push(S ,Bagin);
+	
+	while(1)
+	{
+		temp=Gettop(S);
+
+		x=temp.X;
+
+		y=temp.Y;
+
+		step=0;
+
+		if(maze[x+1][y]==0)				//向下走
+		{
+			step=1;
+
+			maze[x+1][y]=1;
+
+			temp.X=x+1;
+
+			temp.Y=y;
+
+			Push(S ,temp);
+
+			continue;
+		}
+		if(maze[x][y+1]==0)				//向右走
+		{
+			step=1;
+
+			maze[x][y+1]=1;
+
+			temp.X=x;
+
+			temp.Y=y+1;
+
+			Push(S ,temp);
+
+			continue;
+		}
+		if(maze[x-1][y]==0)				//向上走
+		{
+			step=1;
+
+			maze[x-1][y]=1;
+
+			temp.X=x-1;
+
+			temp.Y=y;
+
+			Push(S ,temp);
+
+			continue;
+		}
+		if(maze[x][y-1]==0)				//向左走
+		{
+			step=1;
+
+			maze[x][y-1]=1;
+
+			temp.X=x;
+
+			temp.Y=y-1;
+
+			Push(S ,temp);
+
+			continue;
+		}
+
+		temp=Gettop(S);
+
+		if((temp.X==Stop.X)&&(temp.Y==Stop.Y))
+		{
+			cout<<"寻找成功"<<endl;
+			break;
+		}
+
+
+		if((step==0)&&(temp.X==Bagin.X)&&(temp.Y==Bagin.Y))
+		{
+			cout<<"寻找失败"<<endl;
+
+			break;
+		}
+
+		if(step==0)
+			{
+				Pop(S);
+			}
+
+		
+	}
+	
+}
+
+void main ()
+{
+	SStack S;
+
+	Node bagin ,stop ,*temp;
+
+	cout<<"输入起点"<<endl;
+
+	cin>>bagin.X>>bagin.Y;
+
+	cout<<"输入终点"<<endl;
+
+	cin>>stop.X>>stop.Y;
+
+	InitStack(S);
+
+	Fine(S ,bagin ,stop);
+
+	temp=S.bottom;
+
+	while(temp!=S.top)
+	{
+		cout<<'('<<temp->X<<','<<temp->Y<<')'<<setw(4);
+
+		temp++;
+	}
+
+	cout<<endl;
+
+}
+
+

@@ -1,0 +1,24 @@
+
+#include <iostream.h>
+#include <iomanip.h>
+
+void main ()
+{
+	long sum=0;
+
+	int a ,n ,i ,num;
+
+	cout<<""<<endl;
+
+	cin>>a>>n;
+
+	num=a;
+
+	for(i=1;i<=n;i++)
+	{
+		sum+=num;
+			
+		num=num*10+a;
+	}
+	cout<<sum<<endl;
+}

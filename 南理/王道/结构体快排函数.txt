@@ -1,0 +1,73 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <string.h>
+#include <algorithm>
+
+using namespace std;
+
+typedef struct Student{
+	
+	char name[100];
+
+	int age;
+
+	int score;
+
+}Student;
+
+bool cmp(Student S1 ,Student S2)
+{
+	int temp;
+
+	if(S1.score!=S2.score)
+	{
+		return S1.score>S2.score;
+	}
+	temp=strcmp(S1.name ,S2.name);
+	if(temp!=0)
+	{
+		return temp<0;
+	}
+	if(S1.age!=S2.age)
+	{
+		return S1.age<S2.age;
+	}
+}
+
+
+void main ()
+{
+	int n ,i;
+	
+	Student table[1000];
+
+	cout<<"输入学生数"<<endl;
+
+	cin>>n;
+
+	for(i=0;i<n;i++)
+	{
+		cout<<"输入学生姓名，年龄，分数"<<endl;
+
+		cin>>table[i].name>>table[i].age>>table[i].score;
+	}
+
+	sort(table,table+n,cmp);
+
+	for(i=0;i<n;i++)
+	{
+		cout<<table[i].name<<setw(4)<<table[i].age<<setw(4)<<table[i].score<<endl;
+	}
+}
+
+
+
+/*
+	本次积累的经验
+
+	（1）sort(table,table+n,cmp);						结构体快排方法
+
+	（2）bool cmp(Student S1 ,Student S2)				此函数返回1时，第一个参数排在第二个参数前面
+
+	（3）bool											VC可以使用bool类型
+*/

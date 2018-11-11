@@ -1,0 +1,99 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+
+#define Elemtype int 
+
+typedef struct Node{
+
+	Elemtype data;
+
+	struct Node * next;
+
+}Node;
+
+typedef struct Queue{
+
+	Node *front;
+
+	Node *rear;
+
+}Queue;
+
+void InitQueue(Queue &Q)
+{
+	Q.front=(Node *)malloc(sizeof(Node));
+
+	Q.rear=Q.front;
+
+	Q.rear->next=NULL;
+}
+
+void EnQueue(Queue &Q ,Elemtype n)
+{
+	Node *temp;
+
+	temp=(Node *)malloc(sizeof(Node));
+
+	temp->data=n;
+
+	temp->next=NULL;
+
+	Q.rear->next=temp;
+
+	Q.rear=temp;
+}
+
+Elemtype Getfront(Queue &Q)
+{
+
+	if(Q.front==Q.rear)
+	{
+		cout<<"╤сапря©у"<<endl;
+	}
+	else
+	{
+		return Q.front->next->data;
+	}
+}
+
+Elemtype DeQueue(Queue &Q)
+{
+	Node *temp;
+
+	Elemtype n;
+
+	temp=Q.front->next;
+
+	Q.front->next=temp->next;
+
+	n=temp->data;
+
+	if(temp==Q.rear)
+	{
+		Q.front=Q.rear;
+	}
+
+	free(temp);
+
+	return n;
+}
+
+void DestroyQueue(Queue &Q)
+{
+	while(Q.front)
+	{
+		Q.rear=Q.front->next;
+
+		free(Q.front);
+
+		Q.front=Q.rear;
+	}
+}
+
+void main ()
+{
+
+}

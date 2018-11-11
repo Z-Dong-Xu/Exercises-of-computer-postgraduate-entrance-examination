@@ -1,0 +1,82 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+typedef struct Node{
+	
+	char data;
+
+	struct Node *next;
+}Node, *PNode;
+
+typedef struct Line{
+	
+	PNode frist;
+	PNode last;
+	
+}Line;
+
+void main ()
+{
+	char c;
+
+	int num=0,i,sum ,j ,M;
+
+	cout<<""<<endl;
+
+	Node top;
+
+	PNode temp,min;
+
+	Line line;
+
+	line.frist=&top;
+
+	line.last=&top;
+
+	top.next=NULL;
+
+	while((c=getchar())!='#')
+	{
+		temp=(Node *)malloc(sizeof(Node));
+
+		temp->data=c;
+
+		line.last->next=temp;
+
+		temp->next=line.frist->next;
+
+		line.last=temp;
+		
+		num++;
+	}
+
+	line.frist=line.frist->next;
+
+	M=65535;
+
+	for(i=1;i<=num;i++)
+	{
+		sum=0;
+		temp=line.frist;
+		for(j=1;j<=num;j++)
+		{
+			sum=sum+(temp->data)*(num+1-j);
+			temp=temp->next;
+		}
+		if(sum<M)
+		{
+			min=line.frist;
+			M=sum;
+		}
+		line.frist=line.frist->next;
+	}
+	temp=min;
+	for(i=1;i<=num;i++)
+	{
+		cout<<temp->data<<setw(4);
+		temp=temp->next;
+	}
+	cout<<endl;
+}

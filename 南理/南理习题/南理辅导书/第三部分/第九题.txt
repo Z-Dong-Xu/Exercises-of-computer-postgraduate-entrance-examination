@@ -1,0 +1,16 @@
+nclude <iostream.h>
+#include <iomanip.h>
+#include <math.h>
+
+void main ()
+{
+	int sum ,n;
+
+	cout<<"ÊäÈë"<<endl;
+
+	cin>>n;
+
+	sum=(n+2*n)*(abs(n)+1)/2;
+
+	cout<<sum<<endl;
+}

@@ -1,0 +1,101 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <stack>
+
+using namespace std;
+
+#define MAX 101
+
+int Tree[MAX];
+
+int Sum[MAX];
+
+int FineRoot(int x)
+{
+	if(Tree[x]==-1)
+	{
+		return x;
+	}
+	else
+	{
+		int temp=FineRoot(Tree[x]);
+
+		Tree[x]=temp;
+
+		return temp;
+	}
+}
+
+void main ()
+{
+	int n ,a ,b ,root1,root2;
+
+	int i ,max=1;
+
+	while(scanf("%d",&n)!=EOF)
+	{
+		for(i=0;i<MAX;i++)
+		{
+			Tree[i]=-1;
+
+			Sum[i]=1;
+		}
+
+		for(i=1;i<=n;i++)
+		{
+			cin>>a>>b;
+
+			root1=FineRoot(a);
+
+			root2=FineRoot(b);
+
+			if(root1!=root2)
+			{
+				Tree[root2]=root1;
+
+				Sum[root1]=Sum[root1]+Sum[root2];
+			}
+		}
+		
+		for(i=1;i<MAX;i++)
+		{
+			if(Sum[i]>max)
+			{
+				max=Sum[i];
+			}
+		}
+
+		cout<<max<<endl;
+
+
+	}
+}
+
+
+/*
+	朋友圈人数
+	（1）int FineRoot(int x)													寻找根节点（寻找核心人物）
+		{
+			if(Tree[x]==-1)
+			{
+				return x;
+			}
+			else
+			{
+				int temp=FineRoot(Tree[x]);
+
+				Tree[x]=temp;
+
+				return temp;
+			}
+		}
+	（2）if(root1!=root2)														设置Sum数组，用Sum[i]保存以i节点为根的节点数（小团体人数）
+		{
+			Tree[root2]=root1;
+
+			Sum[root1]=Sum[root1]+Sum[root2];
+		}
+
+
+
+*/

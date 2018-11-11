@@ -1,0 +1,70 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <stdio.h>
+#include <stack>
+
+using namespace std;
+
+#define MAX 110
+
+stack<int> S;
+
+char str[MAX];
+
+char ans[MAX];
+
+void main ()
+{
+	char c;
+
+	int i=0 ,j=0 ,ls;
+
+	cout<<"输入"<<endl;
+
+	cin>>str;
+
+	ls=strlen(str);
+
+	for(i=0;i<ls;i++)
+	{
+		c=str[i];
+
+		if(c=='(')
+		{
+			S.push(i);
+			ans[i]=' ';						///////////////////这一句不能少
+		}
+		if(c==')')
+		{
+			if(S.empty()==1)
+			{
+				ans[i]='?';
+			}
+			else
+			{
+				S.pop();
+				ans[i]=' ';
+			}
+		}
+		if(c!='('&&c!=')')
+		{
+			ans[i]=' ';
+		}
+	}
+
+	ans[i]=0;
+
+	while(S.empty()!=1)
+	{
+		j=S.top();
+
+		S.pop();
+
+		ans[j]='$';
+	}
+
+	cout<<str<<endl;
+	
+	cout<<ans<<endl;
+
+}

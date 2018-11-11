@@ -1,0 +1,113 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <vector>
+
+using namespace std;
+
+#define MAX 11
+
+typedef struct edge{
+
+	int W;
+
+	int next;
+
+}Edge;
+
+vector <Edge> Etable[MAX];
+
+int Flag[MAX];
+
+int Dis[MAX];
+
+void main ()
+{
+	int n ,m ,i ,j;
+
+	int frist ,next ,W;
+
+	int NewP;
+
+	Edge temp;
+
+	while(scanf("%d",&n)!=EOF)
+	{
+		scanf("%d",&m);
+
+		if(n==0&&m==0)
+		{
+			break;
+		}
+		
+		for(i=1;i<=n;i++)
+		{
+			Flag[i]=0;
+
+			Dis[i]=-1;
+		}
+
+		for(i=1;i<=n;i++)
+		{
+			Etable[i].clear();
+		}
+
+		for(i=1;i<=m;i++)
+		{
+			cin>>frist>>next>>W;
+			
+			temp.next=next;
+
+			temp.W=W;
+
+			Etable[frist].push_back(temp);
+
+			temp.next=frist;
+
+			Etable[next].push_back(temp);
+		}
+	
+		NewP=1;
+		Flag[1]=1;
+		Dis[1]=0;
+
+		for(i=1;i<n;i++)
+		{
+			for(j=0;j<Etable[NewP].size();j++)
+			{
+				next=Etable[NewP][j].next;
+
+				W=Etable[NewP][j].W;
+
+				if(Flag[next]==1)
+				{
+					continue;
+				}
+				if(Dis[next]==-1||Dis[next]>Dis[NewP]+W)
+				{
+					Dis[next]=Dis[NewP]+W;
+				}
+			}
+
+			int Min=65535;
+
+			for(i=1;i<=n;i++)
+			{
+				if(Dis[i]==-1)
+				{
+					continue;
+				}
+				if(Flag[i]==0&&Dis[i]<Min)
+				{
+					Min=Dis[i];
+
+					NewP=i;
+				}
+			}
+
+			Flag[NewP]=1;
+
+		}
+
+	cout<<Dis[n]<<endl;
+	}
+}

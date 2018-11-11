@@ -1,0 +1,96 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <algorithm>
+#include <stack>
+
+using namespace std;
+
+#define DMAX 101
+#define TMAX 1000
+
+typedef struct Node{
+
+	int Time;
+
+	int Value;
+
+}Node;
+
+bool cmp(Node a,Node b)
+{
+	return a.Time<b.Time;
+}
+
+Node DTable[DMAX];
+
+int Dp[TMAX];
+
+int Flag[DMAX];
+
+void main ()
+{
+	int T ,M ,i ,j;
+
+	int flag ,temp ,Max;
+
+	while(scanf("%d",&T)!=EOF)
+	{
+		scanf("%d",&M);
+
+		for(i=1;i<=M;i++)
+		{
+			cin>>DTable[i].Time>>DTable[i].Value;
+		}
+
+		sort(DTable+1 ,DTable+M+1 ,cmp);
+
+		for(i=0;i<=T;i++)
+		{
+			Dp[i]=0;
+		}
+
+		for(i=1;i<=M;i++)
+		{
+			Flag[i]=0;
+		}
+
+		for(i=1;i<=T;i++)
+		{
+			Max=0;
+
+			for(j=1;j<=M;j++)
+			{
+				if(i>=DTable[j].Time&&Flag[j]==0)
+				{
+					temp=DTable[j].Value+Dp[i-DTable[j].Time];
+				}
+				else
+				{
+					temp=0;
+				}
+				if(temp>Max)
+				{
+					Max=temp;
+					flag=j;
+				}
+				
+			}
+
+			if(Max>Dp[i-1])
+			{
+				Dp[i]=Max;
+				Flag[flag]=1;
+			}
+			else
+			{
+				Dp[i]=Dp[i-1];
+			}
+
+		}
+
+		cout<<Dp[T]<<endl;
+
+	}
+
+}

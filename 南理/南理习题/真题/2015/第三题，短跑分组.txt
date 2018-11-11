@@ -1,0 +1,47 @@
+#include <iostream.h>
+#include <iomanip.h>
+
+void main ()
+{
+	int num;
+
+	int a[20];
+
+	int team ,n ,i ,j ,sum;
+
+	cout<<"ÊäÈëÈËÊı"<<endl;
+
+	cin>>num;
+
+	team=(num/8)+1;
+
+	n=num/team;
+
+	for(i=1;i<=team;i++)
+	{
+		a[i]=n;
+	}
+	
+	for(i=1;i<=team;i++)
+	{
+		sum=0;
+		for(j=1;j<=team;j++)
+		{
+			sum+=a[j];
+		}
+		if(sum==num)
+		{
+			break;
+		}
+		else
+		{
+			a[i]=n+1;
+		}
+	}
+
+	for(i=1;i<=team;i++)
+	{
+		cout<<a[i]<<setw(8);
+	}
+	cout<<endl;
+}

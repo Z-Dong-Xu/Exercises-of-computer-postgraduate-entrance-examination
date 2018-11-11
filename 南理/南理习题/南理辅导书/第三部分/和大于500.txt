@@ -1,0 +1,13 @@
+#include <iostream.h>
+#include <iomanip.h>
+
+void main ()
+{
+	int sum=0 ,num=1;
+	while(sum<500)
+	{
+		sum+=num;
+		num++;
+	}
+	cout<<num<<endl<<sum<<endl;
+}

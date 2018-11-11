@@ -1,0 +1,34 @@
+#include <iostream.h>
+#include <iomanip.h>
+
+void main ()
+{
+	int num ,i ,j ,a[100][100] ,count=1;
+
+	cout<<"ÊäÈë"<<endl;
+
+	cin>>num;
+
+	for(i=0;i<num;i++)
+	{
+		for(j=0;j<=i;j++)
+		{
+			a[j][i]=count;
+			count++;
+		}
+		for(j=i-1;j>=0;j--)
+		{
+			a[i][j]=count;
+			count++;
+		}
+	}
+	for(i=0;i<num;i++)
+	{
+		for(j=0;j<num;j++)
+		{
+			cout<<setw(8)<<a[i][j];
+		}
+		cout<<endl;
+	}
+	cout<<endl;
+}

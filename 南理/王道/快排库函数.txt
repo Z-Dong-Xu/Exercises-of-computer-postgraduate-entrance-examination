@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <algorithm>
+
+using namespace std;
+
+int main ()
+{
+	int n ,i;
+
+	int buf[100];
+
+	while(scanf("%d",&n)!=EOF)
+	{
+		for(i=0;i<n;i++)
+		{
+			scanf("%d",&buf[i]);
+		}
+		
+		sort(buf,buf+n);
+
+		for(i=0;i<n;i++)
+		{
+			printf("%d ",buf[i]);
+		}
+
+		printf("\n");
+	}
+
+	return 0;
+}
+
+/*
+	本次积累的经验
+
+	（1）sort					快速排序库文件  
+	（2）sort(buf,buf+n);		使用方法
+
+*/

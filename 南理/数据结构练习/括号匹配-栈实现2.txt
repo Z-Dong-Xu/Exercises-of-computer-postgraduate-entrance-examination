@@ -1,0 +1,133 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+
+#define MAX 20
+
+typedef struct Stack{
+
+	char *top;
+
+	char *bottom;
+
+	int size;
+
+}SStack;
+
+void InitStack(SStack &S)
+{
+	S.bottom=(char *)malloc(MAX*sizeof(char));
+
+	S.top=S.bottom;
+
+	S.size=MAX;
+}
+
+char Gettop(SStack &S)
+{
+	char n;
+
+	if(S.top==S.bottom)
+	{
+		cout<<""<<endl;
+	}
+
+	n=*(S.top-1);
+
+	return n;
+}
+
+void Push(SStack &S,char n)
+{
+	*(S.top)=n;
+
+	S.top++;
+}
+
+char Pop(SStack &S )
+{
+	char n;
+
+	S.top--;
+
+	n=*(S.top);
+
+	return n;
+}
+
+void main ()
+{
+	char c ,temp;
+
+	int  flag;
+
+	SStack S;
+
+	cout<<"ÊäÈë"<<endl;
+
+	temp=1;
+
+	InitStack(S);
+
+	flag=1;
+
+	c=getchar();
+
+	while(c!='#')
+	{
+		if(c=='('||c=='['||c=='{')
+		{
+			Push(S,c);
+		}
+		if(c==')')
+		{
+			if(Gettop(S)=='(')
+			{
+				Pop(S);
+			}
+			else
+			{
+				flag=0;
+				break;
+			}
+		}
+		if(c==']')
+		{
+			if(Gettop(S)=='[')
+			{
+				Pop(S);
+			}
+			else
+			{
+				flag=0;
+				break;
+			}
+		}
+		if(c=='}')
+		{
+			if(Gettop(S)=='{')
+			{
+				Pop(S);
+			}
+			else
+			{
+				flag=0;
+				break;
+			}
+		}
+
+		c=getchar();
+
+	}
+
+	if(flag==1)
+	{
+		cout<<"Æ¥Åä³É¹¦"<<endl;
+	}
+	else
+	{
+		cout<<"Æ¥ÅäÊ§°Ü"<<endl;
+	}
+}

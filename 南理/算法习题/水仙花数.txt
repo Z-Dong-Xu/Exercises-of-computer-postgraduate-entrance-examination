@@ -1,0 +1,26 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <math.h>
+
+void main ()
+{
+	int num ,i ,sum;
+
+	for(i=100;i<=999;i++)
+	{
+		num=i;
+		sum=0;
+		while(num>=1)
+		{
+			sum=pow(num%10,3)+sum;
+			num/=10;
+		}
+		if(sum==i)
+		{
+			cout<<sum<<setw(8);
+		}
+
+	}
+
+	cout<<endl;
+}

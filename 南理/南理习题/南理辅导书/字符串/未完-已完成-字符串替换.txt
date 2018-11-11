@@ -1,0 +1,78 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <string.h>
+
+#define MAX 100
+
+void main ()
+{
+	int i ,j , k, flag;
+
+	int ls, lk ,lw;
+
+	char str[MAX] ,key[MAX] ,swap[MAX] ,temp[MAX];
+
+	cout<<"ÊäÈë×Ö·û´®"<<endl;
+
+	cin>>str;
+
+	cout<<"ÊäÈë±»Ìæ»»×Ö·û´®"<<endl;
+
+	cin>>key;
+
+	cout<<"ÊäÈëÌæ»»×Ö·û´®"<<endl;
+
+	cin>>swap;
+
+	ls=strlen(str);
+
+	lk=strlen(key);
+
+	lw=strlen(swap);
+
+	i=0;
+
+	while(str[i+lk-1]!=NULL)
+	{
+		flag=1;
+		k=0;
+		for(j=i;j<i+lk;j++)
+		{
+			temp[k]=str[j];
+			k++;
+		}
+		temp[j]='\0';
+
+		flag=strcmp(temp,key);
+
+		if(flag==0)
+		{
+			for(j=i;j<=ls-lk;j++)
+			{
+				str[j]=str[j+lk];
+			}
+			
+			ls=strlen(str);
+
+			for(j=ls;j>=i;j--)
+			{
+				str[j+lw]=str[j];
+			}
+
+			k=0;
+			for(j=i;j<i+lw;j++)
+			{
+;
+				str[j]=swap[k];
+				k++;
+			}
+			i+=lw;
+		}
+		else
+			i++;
+	}
+
+	cout<<""<<endl;
+
+	cout<<str<<endl;
+}

@@ -1,0 +1,119 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#define MAX 100
+#define VertexType char
+#define Edge int 
+
+typedef struct {
+
+	VertexType DataTable[MAX];
+
+	Edge EdgeTable[MAX][MAX];
+
+	int Vnum;
+
+	int Enum;
+
+}Gragh;
+
+void CreateGragh(Gragh &G)
+{
+	G.Enum=0;
+
+	G.Vnum=0;
+}
+
+void InitGragh(Gragh &G ,int n ,int m)
+{
+
+	int i ,x, y ,w;
+
+	VertexType V;
+
+	G.Vnum=n;
+
+	G.Enum=m;
+
+	cout<<"初始化图"<<endl;
+
+	for(i=1;i<=n;i++)
+	{
+		cout<<"输入第"<<i<<"个节点数据"<<endl;			////节点输入  需简化
+		cin>>V;
+		G.DataTable[i]=V;
+	}
+
+	cout<<"数据输入结束"<<endl;
+
+	for(i=1;i<=m;i++)
+	{
+		cout<<"输入第"<<i<<"组起点,终点,权值"<<endl;			////简化
+		cin>>x>>y>>w;
+		G.EdgeTable[x][y]=w;
+	}
+
+	cout<<"图初始化成功"<<endl;
+}
+
+void InsertGragh(Gragh &G)
+{
+	VertexType V;
+
+	int Oedge ,Iedge ,adjV;
+
+	int i ,w;
+
+	cout<<"插入节点"<<endl<<"输入节点数据,出度,入度"<<endl;
+
+	cin>>V>>Oedge>>Iedge;
+
+	G.Enum=G.Enum+Oedge+Iedge;
+
+	G.Vnum++;
+
+	G.DataTable[G.Vnum]=V;
+
+	for(i=1;i<=Oedge;i++)
+	{
+		cout<<"输入第"<<i<<"个弧头，权值"<<endl;
+
+		cin>>adjV>>w;
+
+		G.EdgeTable[G.Vnum][adjV]=w;
+	}
+	for(i=1;i<=Iedge;i++)
+	{
+		cout<<"输入第"<<i<<"个弧尾，权值"<<endl;
+
+		cin>>adjV>>w;
+
+		G.EdgeTable[adjV][G.Vnum]=w;
+	}
+
+	cout<<"插入成功"<<endl;
+
+}
+
+
+void main ()
+{
+
+	Gragh G;
+
+	int n ,m;
+
+	cout<<"输入节点个数，弧个数"<<endl;
+
+	cin>>n>>m;
+
+	CreateGragh(G);
+
+	InitGragh(G ,n ,m);
+
+	InsertGragh(G);
+	
+	cout<<""<<endl;
+}

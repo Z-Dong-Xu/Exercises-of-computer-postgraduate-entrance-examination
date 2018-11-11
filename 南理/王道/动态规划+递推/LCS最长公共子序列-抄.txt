@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <string>
+#include <vector>
+
+#define MAX 11
+
+using namespace std;
+
+int ATable[MAX][MAX];
+
+int Max(int a ,int b)
+{
+	if(a>b)
+	{
+		return a;
+	}
+	else
+		return b;
+}
+
+void main ()
+{
+	char S1[MAX] ,S2[MAX];
+
+	int L1 ,L2;
+
+	int i ,j;
+
+	while(scanf("%s",S1)!=EOF)
+	{
+		scanf("%s",S2);
+
+		L1=strlen(S1);
+
+		L2=strlen(S2);
+
+		for(i=0;i<=L1;i++)
+		{
+			for(j=0;j<=L2;j++)
+			{
+				ATable[i][j]=0;
+			}
+		}
+		
+		for(i=1;i<=L1;i++)
+		{
+			for(j=1;j<=L2;j++)
+			{
+				if(S1[i-1]!=S2[j-1])
+				{
+					ATable[i][j]=Max(ATable[i][j-1] ,ATable[i-1][j]);
+				}
+				else
+				{
+					ATable[i][j]=ATable[i-1][j-1]+1;
+				}
+			}
+		}
+
+		cout<<ATable[L1][L2]<<endl;
+	}
+}
+
+
+
+/*
+		动态规划---最长公共子序列		
+		（1）	状态转移										
+		for(i=1;i<=L1;i++)
+		{
+			for(j=1;j<=L2;j++)
+			{
+				if(S1[i-1]!=S2[j-1])
+				{
+					ATable[i][j]=Max(ATable[i][j-1] ,ATable[i-1][j]);
+				}
+				else
+				{
+					ATable[i][j]=ATable[i-1][j-1]+1;
+				}
+			}
+		}

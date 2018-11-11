@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <stack>
+
+using namespace std;
+
+stack <int> S;
+
+char table[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+
+void main ()
+{
+	long NUM ,temp;
+
+	scanf("%ld",&NUM);
+
+	temp=NUM;
+
+	while(temp>=1)
+	{
+		S.push(temp%2);
+
+		temp/=2;
+	}
+
+	while(S.empty()!=true)
+	{
+		temp=S.top();
+
+		cout<<table[temp];
+
+		S.pop();
+	}
+
+	cout<<endl;
+
+	temp=NUM;
+
+	while(temp>=1)
+	{
+		S.push(temp%8);
+
+		temp/=8;
+	}
+
+	while(S.empty()!=true)
+	{
+		temp=S.top();
+
+		cout<<table[temp];
+
+		S.pop();
+	}
+
+	cout<<endl;
+
+	temp=NUM;
+
+	while(temp>=1)
+	{
+		S.push(temp%16);
+
+		temp/=16;
+	}
+
+	while(S.empty()!=true)
+	{
+		temp=S.top();
+
+		cout<<table[temp];
+
+		S.pop();
+	}
+
+	cout<<endl;
+}

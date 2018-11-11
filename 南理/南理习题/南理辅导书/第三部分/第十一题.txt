@@ -1,0 +1,64 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <math.h>
+
+void main ()
+{
+	long int num ,m ,i ,n ,a[20] ,num1;
+
+	for(num=100;num<1000000;num++)
+	{
+		n=log10(num)+1;
+		m=num;
+		for(i=1;i<=n;i++)
+		{
+			a[i-1]=m%10;
+			m/=10;
+		}
+		num1=a[0];
+		for(i=n-1;i>0;i--)
+		{
+			num1*=10;
+			num1+=a[i];
+		}
+		if(num1==(num*4))
+		{
+			cout<<num<<endl;
+			break;
+		}
+		
+	}
+}
+
+
+#include <iostream.h>
+#include <iomanip.h>
+#include <math.h>
+
+long P(long num);
+
+void main ()
+{
+	long int num ,m;
+	for(num=100;num<1000000;num++)
+	{
+		m=P(num);
+		if(m==num*4)
+		{
+			cout<<num<<endl;
+			break;
+		}
+	}
+}
+
+long P(long num)
+{
+	long n ,m;
+	n=num%10;
+	num/=10;
+	m=log10(num)+1;
+	n=n*pow(10,m);
+	n=n+num;
+	return n;
+}
+

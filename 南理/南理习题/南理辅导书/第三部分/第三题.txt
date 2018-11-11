@@ -1,0 +1,21 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <math.h>
+
+void main ()
+{
+	long num;
+
+	int n ,m;
+
+	for(num=1;num<=100000;num++)
+	{
+		n=sqrt(num+100);
+		m=sqrt(num+268);
+		if(n*n==num+100&&m*m==num+268)
+		{
+			cout<<setw(8)<<num;
+		}
+	}
+	cout<<endl;
+}

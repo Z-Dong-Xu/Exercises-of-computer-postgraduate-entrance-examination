@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <vector>
+
+using namespace std;
+
+#define MAX 26
+
+int DataTable[MAX];
+
+int LDS[MAX];
+
+void main ()
+{
+	int n ,i ,j;
+
+	int Max ,temp;
+
+	while(scanf("%d",&n)!=EOF)
+	{
+		for(i=1;i<=n;i++)
+		{
+			cin>>DataTable[i];
+		}
+
+		LDS[1]=1;
+
+		for(i=2;i<=n;i++)
+		{
+			Max=1;
+
+			for(j=1;j<i;j++)
+			{
+				if(DataTable[i]<=DataTable[j])
+				{
+					temp=LDS[j]+1;
+					if(temp>Max)
+					{
+						Max=temp;
+					}
+				}
+			}
+
+			LDS[i]=Max;
+		}
+
+//		cout<<LDS[n]<<endl;							注意不一定是LDS{n}是最大的
+		
+		Max=1;
+
+		for(i=1;i<=n;i++)
+		{
+			if(LDS[i]>Max)
+			{
+				Max=LDS[i];
+			}
+		}
+
+		cout<<Max<<endl;
+
+	}
+}

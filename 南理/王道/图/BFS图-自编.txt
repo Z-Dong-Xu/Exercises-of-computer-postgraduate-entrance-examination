@@ -1,0 +1,111 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <queue>
+#include <vector>
+
+using namespace std;
+
+#define MAX 11
+
+int Table[MAX][MAX];
+
+void BFS(int n)
+{
+	queue <int> Q;
+
+	vector <int> V;
+	
+	int i;
+
+	int NewP;
+
+	int Flag[MAX];
+
+	for(i=1;i<=n;i++)
+	{
+		Flag[i]=0;
+	}
+
+	NewP=1;
+
+	Flag[NewP]=1;
+
+	Q.push(NewP);
+
+	V.push_back(NewP);
+
+	while(1)
+	{
+
+		for(i=1;i<=n;i++)
+		{
+			if(Table[NewP][i]!=0&&Flag[i]==0)
+			{
+				Q.push(i);
+
+				V.push_back(i);
+
+				Flag[i]=1;
+			}
+		}
+
+
+		if(Q.size()>1)
+		{
+			Q.pop();
+
+			NewP=Q.front();
+		}
+		else
+		{
+			break;
+		}
+	}
+
+	if(V.size()==n)
+	{
+		for(i=0;i<n;i++)
+		{
+			cout<<V[i]<<setw(4);
+		}
+	}
+	else
+	{
+		cout<<"ERROR";
+	}
+	cout<<endl;
+}
+
+void main ()
+{
+	int n ,m ,i ,j;
+
+	int frist ,next;
+
+	while(scanf("%d",&n)!=EOF)
+	{
+		scanf("%d",&m);
+
+		if(n==0&&m==0)
+		{
+			break;
+		}
+		for(i=1;i<=n;i++)
+		{
+			for(j=1;j<=n;j++)
+			{
+				Table[i][j]=0;
+			}
+		}
+		for(i=1;i<=m;i++)
+		{
+			cin>>frist>>next;
+
+			Table[frist][next]=1;
+		}
+
+		BFS(n);
+	}
+
+}

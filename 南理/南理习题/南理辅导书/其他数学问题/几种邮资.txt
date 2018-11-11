@@ -1,0 +1,52 @@
+#include <iostream.h>
+#include <iomanip.h>
+
+#define MAX 100
+
+int C(float num,float b[],int n);
+
+void main ()
+{
+	int i ,j ,k ,count=0;
+
+	float sum,a[MAX];
+
+	for(i=0;i<=5;i++)
+	{
+		for(j=0;j<=4;j++)
+		{
+			for(k=0;k<=6;k++)
+			{
+				sum=0.8*i+1*j+1.8*k;
+				if(C(sum,a,count)==1)
+				{
+					a[count]=sum;
+					count++;
+				}
+			}
+		}
+	}
+
+	for(i=0;i<count;i++)
+	{
+		cout<<setw(8)<<a[i];
+	}
+	cout<<endl;
+
+	cout<<count<<endl;
+}
+
+int C(float num,float b[],int n)
+{
+	int flag=1 ,i;
+
+	for(i=0;i<n;i++)
+	{
+		if(b[i]==num)
+		{
+			flag=0;
+			break;
+		}
+	}
+	return flag;
+}

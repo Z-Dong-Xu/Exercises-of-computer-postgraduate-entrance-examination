@@ -1,0 +1,99 @@
+#include <stdio.h>
+#include <iomanip.h>
+#include <iostream.h>
+#include <algorithm>
+#include <math.h>
+#include <vector>
+
+using namespace std;
+
+#define MAX 11
+#define INF 10000;
+
+int DTable[MAX];
+
+int ATable[MAX][MAX+1];
+
+void main ()
+{
+	int n ,m ,i ,j;
+
+	while(scanf("%d",&n)!=EOF)
+	{
+		scanf("%d",&m);
+
+		for(i=1;i<=n;i++)
+		{
+			cin>>DTable[i];
+		}
+
+		for(i=0;i<=m;i++)
+		{
+			for(j=0;j<=n;j++)
+			{
+				ATable[i][j]=0;
+			}
+		}
+
+		sort(DTable+1 ,DTable+n);
+
+		for(i=1;i<=m;i++)
+		{
+			for(j=i*2;j<=n;j++)
+			{
+				if(j>i*2)
+				{
+					ATable[i][j]=ATable[i][j-1];
+				}
+				else
+				{
+					ATable[i][j]=INF;
+				}
+
+				if(ATable[i][j]>ATable[i-1][j-2]+pow(abs(DTable[j]-DTable[j-1]) ,2))
+				{
+					ATable[i][j]=ATable[i-1][j-2]+pow(abs(DTable[j]-DTable[j-1]) ,2);
+				}
+			}
+		}
+		
+		cout<<ATable[m][n]<<endl;
+	}
+}
+
+
+
+
+/*
+		动态规划
+		（1）				状态转移
+		for(i=1;i<=m;i++)
+		{
+			for(j=i*2;j<=n;j++)
+			{
+				if(j>i*2)
+				{
+					ATable[i][j]=ATable[i][j-1];
+				}
+				else
+				{
+					ATable[i][j]=INF;
+				}
+
+				if(ATable[i][j]>ATable[i-1][j-2]+pow(abs(DTable[j]-DTable[j-1]) ,2))
+				{
+					ATable[i][j]=ATable[i-1][j-2]+pow(abs(DTable[j]-DTable[j-1]) ,2);
+				}
+			}
+		}
+
+
+
+
+
+
+
+
+
+
+  */

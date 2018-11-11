@@ -1,0 +1,121 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <stack>
+#include <vector>
+
+using namespace std;
+
+#define MAX 11
+
+int Table[MAX][MAX];
+
+void DFS(int n)
+{
+	int Flag[MAX] ,flag ,Sum=0;
+
+	int NewP;
+	
+	int i;
+
+	vector <int>  Q;
+
+	stack <int>  S;
+
+	for(i=1;i<=n;i++)
+	{
+		Flag[i]=0;
+	}
+
+	NewP=1;
+
+	Flag[NewP]=1;
+
+	S.push(NewP);
+
+	Q.push_back(NewP);
+
+	while(1)
+	{
+		flag=0;
+
+		for(i=1;i<=n;i++)
+		{
+			if(Table[NewP][i]!=0&&Flag[i]==0)
+			{
+				flag=1;
+
+				NewP=i;
+
+				Flag[NewP]=1;
+
+				S.push(NewP);
+
+				Q.push_back(NewP);
+
+				break;
+			}
+		}
+
+		if(flag==0)
+		{
+			if(S.size()>1)
+			{
+				S.pop();
+
+				NewP=S.top();
+			}
+			else
+			{
+				break;
+			}
+		}
+	}
+
+	if(Q.size()==n)
+	{
+		for(i=0;i<n;i++)
+		{
+			cout<<Q[i]<<setw(4);
+		}
+	}
+	else
+	{
+		cout<<"ERROR";
+	}
+	cout<<endl;
+}
+
+void main ()
+{
+	int n ,m ,i ,j;
+
+	int frist ,next;
+
+	while(scanf("%d",&n)!=EOF)
+	{
+		scanf("%d",&m);
+
+		if(n==0&&m==0)
+		{
+			break;
+		}
+		
+		for(i=1;i<=n;i++)
+		{
+			for(j=1;j<=n;j++)
+			{
+				Table[i][j]=0;
+			}
+		}
+
+		for(i=1;i<=m;i++)
+		{
+			cin>>frist>>next;
+
+			Table[frist][next]=1;
+		}
+
+		DFS(n);
+	}
+}

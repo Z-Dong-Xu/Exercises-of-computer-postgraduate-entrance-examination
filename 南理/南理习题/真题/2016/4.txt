@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <iomanip.h>
+#include <iostream.h>
+
+#define MAX 501
+
+int Data[MAX];
+
+int dp[MAX];
+
+int M(int a ,int b)
+{
+	if(a>b)
+	{
+		return a;
+	}
+	else
+	{
+		return b;
+	}
+}
+
+void main ()
+{
+	int n ,i ,j;
+
+	int temp ,tmax ,Max;
+
+	cin>>n;
+
+	for(i=1;i<=n;i++)
+	{
+		cin>>Data[i];
+	}
+
+	for(i=1;i<=n;i++)
+	{
+		dp[i]=1;
+	}
+
+	for(i=1;i<=n;i++)
+	{
+		
+		tmax=1;
+
+		for(j=1;j<i;j++)
+		{
+			if(Data[i]>Data[j])
+			{
+				temp=dp[j]+1;
+
+				tmax=M(temp ,tmax);
+			}
+		}
+
+		dp[i]=tmax;
+	}
+
+	Max=1;
+
+	for(i=1;i<=n;i++)
+	{
+		if(dp[i]>Max)
+		{
+			Max=dp[i];
+		}
+	}
+
+	cout<<Max<<endl;
+
+}

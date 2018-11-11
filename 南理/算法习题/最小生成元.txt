@@ -1,0 +1,39 @@
+#include <iostream.h>
+#include <iomanip.h>
+
+void main ()
+{
+	int num ,n ,m ,temp,flag=0;
+
+	cout<<""<<endl;
+
+	cin>>num;
+
+	for(n=1;n<num;n++)
+	{
+		m=n;
+		while(m<num)
+		{
+			temp=m;
+			while(temp>=1)
+			{
+				m=m+temp%10;
+				temp/=10;
+			}
+
+		}
+		if(m==num)
+		{
+			cout<<n<<endl;
+			flag=1;
+			break;
+		
+		}
+	}
+
+	if(flag==0)
+	{
+		cout<<"нч╫Б"<<endl;
+	}
+
+}

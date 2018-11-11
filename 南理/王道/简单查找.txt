@@ -1,0 +1,45 @@
+#include <iostream.h>
+#include <stdio.h>
+#include <string.h>
+#include <algorithm>
+
+#define MAX 200
+
+int table[MAX];
+
+void main ()
+{
+	int n ,num ,flag=0 ,i;
+
+	cout<<"输入个数"<<endl;
+
+	cin>>n;
+
+	cout<<"输入数据"<<endl;
+
+	for(i=0;i<n;i++)
+	{
+		cin>>table[i];
+	}
+
+	cout<<"输入"<<endl;
+
+	cin>>num;
+
+	for(i=0;i<n;i++)
+	{
+		if(num==table[i])
+		{
+			flag=1;
+			break;
+		}
+	}
+	if(flag==1)
+	{
+		cout<<i<<endl;
+	}
+	else
+	{
+		cout<<"error"<<endl;
+	}
+}

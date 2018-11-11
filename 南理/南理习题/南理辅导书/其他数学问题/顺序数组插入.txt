@@ -1,0 +1,33 @@
+#include <iostream.h>
+#include <iomanip.h>
+
+#define MAX 100
+
+void main ()
+{
+	int num ,i ,j;
+
+	int a[MAX]={1,5,11,23,25,35,64,97};
+
+	cout<<""<<endl;
+
+	cin>>num;
+
+	for(i=0;i<8;i++)
+	{
+		if(num<a[i])
+		{
+			for(j=8;j>i;j--)
+			{
+				a[j]=a[j-1];
+			}
+			a[i]=num;
+			break;
+		}
+	}
+	
+	for(i=0;i<9;i++)
+	{
+		cout<<a[i]<<setw(8);
+	}
+}

@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+
+void main ()
+{
+	int n ,i;
+
+	long S=1;;
+
+	cin>>n;
+
+	for(i=1;i<=n;i++)
+	{
+		S*=i;
+	}
+
+	cout<<S<<endl;
+}

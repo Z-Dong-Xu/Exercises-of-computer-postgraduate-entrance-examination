@@ -1,0 +1,98 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <string.h>
+#include <algorithm>
+#include <stdio.h>
+
+int Hash[101];
+
+void main ()
+{
+	int i ,n;
+
+	int score;
+
+	for(i=0;i<=100;i++)
+	{
+		Hash[i]=0;
+	}
+	
+	cout<<"输入个数"<<endl;
+
+	cin>>n;
+
+	cout<<"输入分数"<<endl;
+
+	for(i=1;i<=n;i++)
+	{
+		cin>>score;
+
+		Hash[score]++;
+	}
+
+	cout<<"输入分数"<<endl;
+
+	cin>>score;
+
+	cout<<Hash[score]<<endl;
+}
+
+
+
+/*
+	本次积累的经验
+
+	（1）Hash[score]++;						Hash表，用Hash方法有时可以简化问题
+
+*/
+
+
+
+
+/////////////////以下为向量法
+
+#include <stdio.h>
+#include <iostream.h>
+#include <vector>
+
+using namespace std;
+
+#define MAX 101
+
+#define N 20
+
+typedef struct Student{
+
+	char Num[N];
+
+	char Name[N];
+
+	int score;
+
+}Student;
+
+vector <Student> STable[MAX];
+
+void main ()
+{
+	int n ,i ,j ,s;
+
+	Student temp;
+
+	while(scanf("%d",&n)!=EOF&&n!=0)
+	{
+		for(i=1;i<=n;i++)
+		{
+			cin>>temp.Num>>temp.Name>>temp.score;
+
+			STable[temp.score].push_back(temp);
+		}
+
+		cin>>s;
+
+		cout<<STable[s].size()<<endl;
+	}
+
+
+
+}

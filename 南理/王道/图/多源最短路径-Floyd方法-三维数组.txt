@@ -1,0 +1,119 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <stack>
+
+using namespace std;
+
+#define MAX 11
+
+int table[MAX][MAX][MAX];
+
+void main ()
+{
+	int n ,m ,i ,j ,k;
+
+	int frist ,next ,W;
+	
+	while(scanf("%d",&n)!=EOF)
+	{
+		scanf("%d",&m);
+
+		if(n==0&&m==0)
+		{
+			break;
+		}
+	
+		for(i=1;i<=n;i++)
+		{
+			for(j=1;j<=n;j++)
+			{
+				table[0][i][j]=-1;
+			}
+		}
+
+		for(i=1;i<=m;i++)
+		{
+			cin>>frist>>next>>W;
+
+			table[0][frist][next]=W;
+
+			table[0][next][frist]=W;
+		}
+
+		for(k=1;k<=n;k++)
+		{
+			for(i=1;i<=n;i++)
+			{
+				for(j=1;j<=n;j++)
+				{
+					if(table[k-1][i][k]==-1||table[k-1][k][j]==-1)
+					{
+						table[k][i][j]=table[k-1][i][j];
+
+						continue;
+					}
+
+					if(table[k-1][i][j]==-1||table[k-1][i][j]>table[k-1][i][k]+table[k-1][k][j])
+					{
+						table[k][i][j]=table[k-1][i][k]+table[k-1][k][j];
+					}
+					else
+					{
+						table[k][i][j]=table[k-1][i][j];
+					}
+
+				}
+
+			}
+
+		}
+
+		cout<<table[n][1][n]<<endl;
+
+	}
+
+
+
+}
+
+
+
+
+/*
+		最短路径----佛洛依德方法----图必须以邻接矩阵形式存储
+
+		（1）
+		for(k=1;k<=n;k++)
+		{
+			for(i=1;i<=n;i++)
+			{
+				for(j=1;j<=n;j++)
+				{
+					if(table[k-1][i][k]==-1||table[k-1][k][j]==-1)											若i无法经由k到达j
+					{
+						table[k][i][j]=table[k-1][i][j];
+
+						continue;
+					}
+
+					if(table[k-1][i][j]==-1||table[k-1][i][j]>table[k-1][i][k]+table[k-1][k][j])			若i经由k到达j比原来更短
+					{
+						table[k][i][j]=table[k-1][i][k]+table[k-1][k][j];
+					}
+					else																					若i经由k到达j比原来长
+					{
+						table[k][i][j]=table[k-1][i][j];
+					}
+
+				}
+
+			}
+
+		}
+
+
+
+
+
+
+*/

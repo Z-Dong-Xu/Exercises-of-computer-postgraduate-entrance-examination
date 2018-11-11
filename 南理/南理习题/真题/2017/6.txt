@@ -1,0 +1,148 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <vector>
+
+using namespace std;
+
+typedef struct E
+{
+	int next;
+
+	long c;
+
+}E;
+
+typedef struct Node 
+{
+	int front;
+
+	long D;
+
+}Node;
+
+vector <E> Etable[110];
+
+int Mark[110];
+
+Node Dis[110];
+
+int ans[110];
+
+void main ()
+{
+	int n ,m;
+
+	int i ,j ,temp ,a ,b;
+
+	int newP ,next ,c;
+
+	E T;
+
+	scanf("%d",&n);
+
+	scanf("%d",&m);
+
+	for(i=1;i<=m;i++)
+	{
+		cin>>a>>b;
+
+		cin>>T.c;
+
+		T.next=b;
+
+		Etable[a].push_back(T);
+
+		T.next=a;
+
+		Etable[b].push_back(T);
+	}
+
+	for(i=1;i<=n;i++)
+	{
+		Mark[i]=0;
+
+		Dis[i].D=-1;
+
+		Dis[i].front=-1;
+	}
+	
+	newP=1;
+
+	Mark[1]=1;
+
+	Dis[1].D=0;
+
+	for(i=1;i<n;i++)
+	{
+		for(j=0;j<Etable[newP].size();j++)
+		{
+			next=Etable[newP][j].next;
+
+			c=Etable[newP][j].c;
+
+			if(Mark[next]==1)
+			{
+				continue;
+			}
+			if(Dis[next].D==-1||Dis[next].D>Dis[newP].D+c)
+			{
+				Dis[next].D=Dis[newP].D+c;
+
+				Dis[next].front=newP;
+			}
+		}
+
+		long min=999999999;
+
+		for(j=1;j<=n;j++)
+		{
+			if(Mark[j]==1)
+			{
+				continue;
+			}
+			if(Dis[j].D==-1)
+			{
+				continue;
+			}
+			if(Dis[j].D<min)
+			{
+				min=Dis[j].D;
+
+				newP=j;
+			}
+
+			Mark[newP]=1;
+
+		}
+
+	}
+
+	if(Dis[n].D==-1)
+	{
+		cout<<-1<<endl;
+	}
+	else
+	{
+		temp=n;
+
+		j=1;
+
+		while(temp!=-1)
+		{
+			ans[j]=temp;
+
+			temp=Dis[temp].front;
+
+			j++;
+		}
+
+		for(i=j-1;i>=2;i--)
+		{
+			cout<<ans[i]<<' ';
+		}
+
+		cout<<ans[1]<<endl;
+	}
+
+}

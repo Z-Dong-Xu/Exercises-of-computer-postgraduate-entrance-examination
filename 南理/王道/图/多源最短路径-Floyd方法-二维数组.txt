@@ -1,0 +1,105 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <queue>
+
+using namespace std;
+
+#define MAX 11
+
+int Table[MAX][MAX];
+
+void main ()
+{
+	int n ,m ,i ,j ,k ,W;
+
+	int frist ,next;
+
+	while(scanf("%d",&n)!=EOF)
+	{
+		scanf("%d",&m);
+
+		if(n==0&&m==0)
+		{
+			break;
+		}
+		
+		for(i=1;i<=n;i++)
+		{
+			for(j=1;j<=n;j++)
+			{
+				Table[i][j]=-1;
+			}
+		}
+
+		for(i=1;i<=m;i++)
+		{
+			cin>>frist>>next>>W;
+
+			Table[frist][next]=W;
+
+			Table[next][frist]=W;
+		}
+
+		for(k=1;k<=n;k++)
+		{
+			for(i=1;i<=n;i++)
+			{
+				for(j=1;j<=n;j++)
+				{
+					if(Table[i][k]==-1||Table[k][j]==-1)
+					{
+						continue;
+					}
+					if(Table[i][j]==-1||Table[i][k]+Table[k][j]<Table[i][j])
+					{
+						Table[i][j]=Table[i][k]+Table[k][j];
+					}
+				
+				}
+			}
+		}
+
+		cout<<Table[1][n]<<endl;
+	}
+}
+
+
+
+
+
+/*
+		最短路径----Floyd方法----二维数组									一定要注意拼写，比如相等==，要不会引起错误，而且很难找到为啥错
+		（1）
+
+		for(k=1;k<=n;k++)
+		{
+			for(i=1;i<=n;i++)
+			{
+				for(j=1;j<=n;j++)
+				{
+					if(Table[i][k]==-1||Table[k][j]==-1)
+					{
+						continue;
+					}
+					if(Table[i][j]==-1||Table[i][k]+Table[k][j]<Table[i][j])
+					{
+						Table[i][j]=Table[i][k]+Table[k][j];
+					}
+				
+				}
+			}
+		}
+
+
+
+	
+
+
+
+
+
+
+
+
+
+*/

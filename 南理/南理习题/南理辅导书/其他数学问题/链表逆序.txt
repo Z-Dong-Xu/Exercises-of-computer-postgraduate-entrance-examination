@@ -1,0 +1,68 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <stdlib.h>
+
+typedef struct Node{
+	int num;
+
+	struct Node *next;
+}Node ,*Nptr;
+
+typedef struct Line{
+	Nptr front;
+
+	Nptr rear;
+}Line;
+
+void main ()
+{
+	int a[]={0,1,2,3,4,5,6,7,8,9};
+
+	int i ,n;
+
+	Node head ;
+
+	Nptr temp;
+
+	Line line;
+
+	line.front=&head;
+
+	line.rear=&head;
+
+	for(i=0;i<=9;i++)
+	{
+		temp=(Nptr)malloc(sizeof(Node));
+
+		temp->num=a[i];
+
+		temp->next=NULL;
+
+		line.rear->next=temp;
+
+		line.rear=temp;
+	}
+	
+	for(i=0;i<9;i++)
+	{
+		temp=head.next;
+
+		head.next=temp->next;
+
+		temp->next=line.rear->next;
+
+		line.rear->next=temp;
+	}
+	temp=line.front->next;
+
+	for(i=0;i<=9;i++)
+	{
+		n=temp->num;
+
+		cout<<setw(4)<<n;
+
+		temp=temp->next;
+	}
+	cout<<endl;
+
+}

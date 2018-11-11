@@ -1,0 +1,39 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <string.h>
+
+#define MAX 100
+
+void main ()
+{
+	int i ,j ,n ,m;
+
+	char str[MAX] ,key[MAX] ,temp[MAX];
+
+	cout<<"输入字符串"<<endl;
+
+	cin>>str;
+
+	cout<<"查找字符串"<<endl;
+
+	cin>>key;
+
+	n=strlen(str);
+
+	m=strlen(key);
+
+	for(i=0;i<=n-m;i++)
+	{
+		for(j=0;j<m;j++)
+		{
+			temp[j]=str[i+j];
+		}
+		temp[j]='\0';
+		if(strcmp(temp,key)==0)
+		{
+			cout<<"查找成功"<<"，在第"<<i+1<<"位"<<endl;
+			break;
+		}
+	}
+}
+

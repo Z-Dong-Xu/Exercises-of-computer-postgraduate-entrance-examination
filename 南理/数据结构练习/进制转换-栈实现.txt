@@ -1,0 +1,101 @@
+#include <iostream.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <iomanip.h>
+
+#define MAX 100
+#define error 0
+#define ture 1
+#define Elemtype int 
+
+#define N 2						//N进制
+
+typedef struct Stack{
+
+	Elemtype *top;
+
+	Elemtype *bottom;
+
+	int size;
+
+}SStack;
+
+void InitStack(SStack &S)		//初始化
+{
+	S.bottom=(Elemtype *)malloc(MAX*sizeof(Elemtype));
+	if(!S.bottom)
+	{
+		exit(0);
+	}
+	S.top=S.bottom;
+
+	S.size=MAX;
+}
+
+Elemtype Gettop(SStack &S)		//读取顶元素
+{
+	Elemtype n;
+
+	if(S.top!=S.bottom)
+	{
+		n=*(S.top-1);
+	}
+	else 
+	{
+		cout<<""<<endl;
+	}
+	return n;
+}
+
+void Push(SStack &S,Elemtype n)		//压入，不自动增加长度
+{
+	
+	*(S.top)=n;
+
+	S.top++;
+
+}
+
+Elemtype Pop(SStack &S)				//弹出
+{
+	Elemtype n;
+
+	if(S.top==S.bottom)
+	{
+		return error;
+	}
+	S.top--;
+	n=*(S.top);
+
+	return n;
+}
+
+
+void main ()
+{
+	SStack S;
+
+	int num ,n;
+
+	cout<<"输入"<<endl;
+
+	cin>>num;
+
+	InitStack(S);
+
+	while(num)
+	{
+		Push(S,num%N);
+
+		num/=N;
+	}
+
+	while(S.top!=S.bottom)
+	{
+		n=Pop(S);
+		cout<<n;
+	}
+
+	cout<<endl;
+}
+

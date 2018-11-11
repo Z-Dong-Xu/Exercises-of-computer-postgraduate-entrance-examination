@@ -1,0 +1,41 @@
+#include <iostream.h>
+#include <iomanip.h>
+
+int S(int n);
+
+void main()
+{
+	int a[2]={-1,-1};
+
+	int num ;
+
+	for(num=2;num<=100;num++)
+	{
+		if(S(num)==1)
+		{
+			a[0]=a[1];
+			a[1]=num;
+			if(a[1]-a[0]==2)
+			{
+			cout<<a[0]<<"ºÍ"<<a[1]<<"----";
+			}
+		}
+		
+	}
+	cout<<endl;
+}
+
+int S(int n)
+{
+	int i;
+
+
+	for(i=2;i<n;i++)
+	{
+		if(n%i==0)
+		{
+			return 0;
+		}
+	}
+	return 1;
+}

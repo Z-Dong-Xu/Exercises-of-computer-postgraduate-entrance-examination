@@ -1,0 +1,114 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <stack>
+
+using namespace std;
+
+#define MAX 101
+
+int Tree[MAX];
+
+int Table[MAX][MAX];
+
+int FineRoot(int x)
+{
+	if(Tree[x]==-1)
+	{
+		return x;
+	}
+	else
+	{
+		int temp=FineRoot(Tree[x]);
+
+		Tree[x]=temp;
+
+		return temp;
+	}
+}
+
+void main ()
+{
+	int n ,i ,j ,k;
+
+	int a ,b ,W ,Min ,Mr1 ,Mr2,Sum ,root1 ,root2 ,count;
+
+	while(scanf("%d",&n)!=EOF&&n!=0)
+	{
+		Sum=0;
+
+		count=0;
+
+		for(i=1;i<=n;i++)
+		{
+			Tree[i]=-1;
+		}
+
+		for(i=1;i<=n;i++)
+		{
+			for(j=1;j<=n;j++)
+			{
+				Table[i][j]=0;
+			}
+		}
+
+		for(i=1;i<=n*(n-1)/2;i++)
+		{
+			cin>>a>>b>>W;
+
+			Table[a][b]=W;
+
+			Table[b][a]=W;
+		}
+		for(k=1;k<=n*(n-1)/2;k++)
+		{
+			Min=65535;
+
+			for(i=1;i<=n;i++)
+			{
+				for(j=1;j<=i;j++)
+				{
+					root1=FineRoot(i);
+
+					root2=FineRoot(j);
+
+					if(root1!=root2&&Table[i][j]!=0&&Table[i][j]<Min)
+					{
+						Min=Table[i][j];
+
+						Mr1=i;
+
+						Mr2=j;
+					}
+				}
+			}
+
+			count++;
+
+			if(count==n)
+			{
+				break;
+			}
+
+			root1=FineRoot(Mr1);
+
+			root2=FineRoot(Mr2);
+
+			Tree[root2]=root1;
+
+			Sum+=Min;
+
+		}
+
+		cout<<Sum<<endl;
+	}
+}
+
+
+
+
+/*
+		畅通工程
+		（1）					程序架构不好，通过不断调试现在可以得到正确结果，但是结构不好，需改进
+
+
+*/

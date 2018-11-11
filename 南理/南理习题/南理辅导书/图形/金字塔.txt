@@ -1,0 +1,28 @@
+#include <iostream.h>
+
+#include <iomanip.h>
+
+void main()
+{
+	int n,m,i;
+
+	cout<<"输入金字塔行数"<<endl;
+
+	cin>>n;
+
+	for(m=0;m<n;m++)
+	{
+		cout<<setw(n*2-m*2);
+
+		for(i=0;i<=m;i++)
+		{
+			cout<<"*"<<setw(4);
+		}
+
+		cout<<endl;
+
+	}
+
+	cout<<endl;
+
+}

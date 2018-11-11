@@ -1,0 +1,46 @@
+#include <iostream.h>
+#include <iomanip.h>
+
+void main()
+{
+	int num ,x ,flag;
+
+	int a[10];
+
+	for(num=100;num<=333;num++)
+	{
+		flag=0;
+		for(x=0;x<=9;x++)
+		{
+			a[x]=0;
+		}
+		x=num;
+		while(x>=1)
+		{
+			a[x%10]=1;
+			x/=10;
+		}
+		x=2*num;
+		while(x>=1)
+		{
+			a[x%10]=1;
+			x/=10;
+		}
+		x=3*num;
+		while(x>=1)
+		{
+			a[x%10]=1;
+			x/=10;
+		}
+		for(x=1;x<=9;x++)
+		{
+			flag=a[x]+flag;
+		}
+		if(flag==9)
+		{
+			cout<<num<<setw(4)<<2*num<<setw(4)<<3*num<<setw(4)<<endl;
+		}
+	}
+	
+	cout<<endl;
+}

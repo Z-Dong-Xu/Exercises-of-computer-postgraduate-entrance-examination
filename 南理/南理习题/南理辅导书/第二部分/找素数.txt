@@ -1,0 +1,45 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <math.h>
+
+int S(int num);
+
+void main ()
+{
+	int m ,n;
+
+	cout<<"输入下限，上限"<<endl;
+
+	cin>>m>>n;
+
+	while(m<=n)
+	{
+		if(S(m)==1)
+		{
+			cout<<setw(4)<<m;
+			m++;
+		}
+		else
+			m++;
+	}
+	cout<<endl;
+}
+
+int S(int num)
+{
+	int flag=1 ,i ,n;
+
+	n=(int)sqrt(num)+1;
+
+	for(i=2;i<=n;i++)
+	{
+		if(num%i==0)
+		{
+			flag=0;
+			break;
+		}
+		else
+			flag=1;
+	}
+	return flag;
+}

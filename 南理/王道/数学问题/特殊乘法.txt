@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+
+#define MAX 20
+
+char S1[MAX] ,S2[MAX];
+
+long ANS;
+
+void main ()
+{
+	int i ,j;
+
+	int L1 ,L2;
+
+	while(scanf("%s",S1)!=EOF)
+	{
+		scanf("%s",S2);
+
+		L1=strlen(S1);
+
+		L2=strlen(S2);
+
+		ANS=0;
+
+		for(i=0;i<L1;i++)
+		{
+			for(j=0;j<L2;j++)
+			{
+				ANS+=(S1[i]-'0')*(S2[j]-'0');
+			}
+		}
+
+		cout<<ANS<<endl;
+
+	}
+}

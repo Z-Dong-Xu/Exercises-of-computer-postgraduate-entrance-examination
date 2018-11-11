@@ -1,0 +1,58 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <math.h>
+
+int P(int a[],long x);
+
+void main ()
+{
+	int num ,i ,a[10], p ,q;
+	long n , m;
+
+	for (num=1;num<=150;num++)
+	{
+		n=pow(num,3);
+
+		m=pow(num,4);
+
+		for(i=0;i<=9;i++)
+		{
+			a[i]=0;
+		}
+		p=log10(n)+1;
+
+		q=log10(m)+1;
+
+		if(p==4&&q==6)
+		{
+			if(P(a,n)==0||P(a,m)==0)
+			{
+				continue;
+			}
+			else
+			{
+				cout<<num<<endl;
+				cout<<n<<endl<<m<<endl;
+			}
+		}
+
+
+	}
+}
+
+int P(int a[],long x)
+{
+	int i;
+
+	while(x>=1)
+	{
+		i=x%10;
+		x/=10;
+		a[i]+=1;
+		if(a[i]==2)
+		{
+			return 0;
+		}
+	}
+	return 1;
+}

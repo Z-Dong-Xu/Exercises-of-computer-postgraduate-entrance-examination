@@ -1,0 +1,46 @@
+#include <iostream.h>
+#include <iomanip.h>
+#include <string.h>
+
+#define MAX 100
+
+void main ()
+{
+	char str[MAX] ,key[MAX] ,temp[MAX];
+
+	int num ,i ,j;
+
+	int ls ,lk;
+
+	cout<<"ÊäÈë×Ö·û´®"<<endl;
+
+	cin>>str;
+
+	cout<<"ÊäÈë²éÕÒ×Ö·û´®"<<endl;
+
+	cin>>key;
+
+	ls=strlen(str);
+
+	lk=strlen(key);
+	
+	i=0;
+
+	num=0;
+
+	while(i+lk<=ls)
+	{
+		for(j=0;j<lk;j++)
+		{
+			temp[j]=str[i+j];
+		}
+		temp[j]='\0';
+		if(strcmp(temp,key)==0)
+		{
+			num++;
+		}
+		i++;
+	}
+
+	cout<<"×Ö·û´®"<<key<<"³öÏÖÁË"<<num<<"´Î"<<endl;
+}

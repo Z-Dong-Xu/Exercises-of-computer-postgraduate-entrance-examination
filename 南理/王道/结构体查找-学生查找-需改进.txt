@@ -1,0 +1,73 @@
+#include <iostream.h>
+#include <stdio.h>
+#include <iomanip.h>
+#include <string.h>
+#include <algorithm>
+
+#define MAX 1000
+#define NAMELENGTH 20
+
+typedef struct Student{
+
+	char num[20];
+
+	char name[NAMELENGTH];
+
+	char sex[4];
+
+	int age;
+
+}Student;
+
+Student table[MAX];
+
+char read[10000][NAMELENGTH];
+
+void main ()
+{
+	int n ,m ,i ,j;
+
+	cout<<"输入学生数"<<endl;
+
+	cin>>n;
+
+	for(i=0;i<n;i++)
+	{
+		cout<<"输入学号，姓名，性别，年龄"<<endl;
+		
+		cin>>table[i].num>>table[i].name>>table[i].sex>>table[i].age;
+
+	}
+	cout<<"输入查找个数"<<endl;
+
+	cin>>m;
+
+	for(i=0;i<m;i++)
+	{
+		cout<<"输入查找学号"<<endl;
+		cin>>read[i];
+	}
+
+	for(i=0;i<m;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			if(!strcmp(read[i],table[j].num))
+			{
+				cout<<table[j].num<<setw(8)<<table[j].name<<setw(8)<<table[j].sex<<setw(8)<<table[j].age<<endl;
+			}
+		}
+	}
+	cout<<endl;
+
+
+}
+
+
+/*
+	本次积累的经验   read[10000][NAMELENGTH]
+
+	（1）cin>>read[i];						输入输出的用法
+
+	（2）strcmp(read[i],table[j].num)		字符串比较函数传入的是两个头指针
+*/

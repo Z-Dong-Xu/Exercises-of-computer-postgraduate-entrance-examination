@@ -1,0 +1,114 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <string>
+
+#define MAX 18
+
+int S[]={1,2,3,5,7,11,13,17,19,21,23,27,29,31,37,41,43,47};
+
+
+bool SU(int n)
+{
+	int i ;
+
+	bool flag=false;
+
+	for(i=0;i<18;i++)
+	{
+		if(n==S[i])
+		{
+			flag=true;
+		}
+	}
+
+	return flag;
+}
+
+
+void F(int n ,int ans[] ,int num)
+{
+	int i ,j;
+
+	int flag[MAX+1];
+
+	for(i=1;i<=n;i++)
+	{
+		flag[i]=0;
+	}
+
+	for(i=1;i<=n;i++)
+	{
+		flag[ans[i]]=1;
+	}
+
+	for(j=1;j<=n;j++)
+	{
+		if(flag[j]==0)
+		{
+			if(SU(ans[num]+j)==true)
+			{
+				if(num+1==n)
+				{
+					if(SU(ans[num]+j)==true&&SU(j+ans[1])==true)
+					{
+						ans[num+1]=j;
+						flag[j]=1;
+					}
+					for(i=1;i<=n;i++)
+					{
+						cout<<ans[i]<<setw(4);
+					}
+					cout<<endl;
+				}
+				else
+				{
+					ans[num+1]=j;
+
+					flag[j]=1;
+
+					F(n ,ans ,num+1);
+				}
+			
+			}
+		}
+	}
+
+
+}
+
+void main ()
+{
+	int n ,i;
+
+	int ans[MAX];
+
+	while(scanf("%d",&n)!=EOF)
+	{
+		
+		for(i=1;i<=n;i++)
+		{
+			ans[i]=0;
+		}
+		ans[1]=1;
+
+		F(n ,ans ,1);
+	}
+}
+
+
+
+
+/*
+		这个递归函数无法回溯，不知咋回事，下午继续思考
+
+
+
+
+
+
+
+
+
+
+  */

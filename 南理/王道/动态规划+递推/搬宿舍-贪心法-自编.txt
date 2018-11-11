@@ -1,0 +1,117 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <algorithm>
+#include <math.h>
+#include <vector>
+
+using namespace std;
+
+#define MAX 11
+
+typedef struct cost{
+
+	int right;
+
+	int left;
+
+	int C;
+
+}cost;
+
+bool cmp(cost a ,cost b)
+{
+	return a.C<b.C;
+
+}
+
+vector <int> DataTable;
+
+vector <cost> Cost;
+
+void D(int n)
+{
+	int i ,flag ,L;
+
+	L=DataTable.size();
+
+	for(i=0;i<L;i++)
+	{
+		if(DataTable[i]==n)
+		{
+			flag=i;
+			break;
+		}
+	}
+
+	DataTable.erase(DataTable.begin()+flag);
+
+}
+
+void main ()
+{
+	int n ,m ,i ,j ,temp;
+
+	int C ,r ,l ,L;
+
+	cost Ctemp;
+
+	while(scanf("%d",&n)!=EOF)
+	{
+		scanf("%d",&m);
+
+		C=0;
+
+		for(i=1;i<=n;i++)
+		{
+			cin>>temp;
+
+			DataTable.push_back(temp);
+		}
+
+		for(i=1;i<=m;i++)
+		{
+			L=DataTable.size();
+
+			sort(DataTable.begin() ,DataTable.begin()+L-1);
+
+			while(Cost.empty()!=true)
+			{
+				Cost.pop_back();
+			}
+
+			for(j=1;j<L;j++)
+			{
+				Ctemp.left=DataTable[j-1];
+
+				Ctemp.right=DataTable[j];
+
+				Ctemp.C=pow(abs(Ctemp.left-Ctemp.right) ,2);
+
+				Cost.push_back(Ctemp);
+			}
+			
+			sort(Cost.begin() ,Cost.begin()+L-2 ,cmp);
+
+			C+=Cost[0].C;
+
+			l=Cost[0].left;
+
+			r=Cost[0].right;
+
+			D(l);
+
+			D(r);
+		}
+
+		cout<<C<<endl;
+		
+
+	}
+}
+
+
+
+
+/*
+		最轻松搬寝室----贪心思想---每次最轻松的拿

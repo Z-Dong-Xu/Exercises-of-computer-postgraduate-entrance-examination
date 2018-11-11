@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <math.h>
+
+long count;
+
+void H(int n ,char a ,char b ,char c)
+{
+	int x;
+
+	if(n>1)
+	{
+		H(n-1 ,a ,b ,c);
+	//	H(n-1 ,b ,a ,c);
+		H(1 ,a ,c ,b);
+		H(n-1 ,c ,b ,a);
+	//	H(n-1 ,b ,c ,a);
+		H(1 ,b ,a ,c);
+		H(n-1 ,a ,b ,c);
+	//	H(n-1 ,b ,a ,c);
+	}
+	else
+	{
+		x=abs(c-a);
+		count+=x;
+
+		if(x==1)
+		{
+			cout<<a<<"->"<<c<<endl;
+		}
+		else
+		{
+			cout<<a<<"->"<<b<<endl;
+			cout<<b<<"->"<<c<<endl;
+		}
+	}
+
+}
+
+void main ()
+{
+	int n;
+
+	while(scanf("%d",&n)!=EOF)
+	{
+		count=0;
+
+		H(n ,'A','B','C');
+
+		cout<<count<<endl;
+	}
+}
+
+
+
+
+/*
+		汉诺塔3-----在原有规则下加入新规则---只能移动到相邻的塔上
+		（1）思考注释的地方
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  */

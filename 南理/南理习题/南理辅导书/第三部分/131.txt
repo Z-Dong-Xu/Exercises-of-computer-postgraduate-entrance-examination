@@ -1,0 +1,24 @@
+#include <iostream.h>
+#include <iomanip.h>
+
+void main ()
+{
+	int num ,n ,n1 ,n2 ,n3;
+
+	for(num=100;num<=999;num++)
+	{
+		n1=num%10;
+		n2=(num/10)%10;
+		n3=(num/100)%10;
+		n=num/11;
+		if(n=n1*n1+n2*n2+n3*n3)
+		{
+			if(n1==n2||n1==n3||n2==n3)
+			{
+				cout<<setw(8)<<num;
+			}
+		}
+	}
+	cout<<endl;
+
+}

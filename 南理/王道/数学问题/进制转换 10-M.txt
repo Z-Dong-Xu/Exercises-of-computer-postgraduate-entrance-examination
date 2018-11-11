@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <iostream.h>
+#include <iomanip.h>
+#include <string>
+#include <stack>
+
+using namespace std;
+
+#define MAX 50
+
+long A ,B ,temp;
+
+stack <int> S;
+
+void main ()
+{
+	int m ,x;
+
+	while(scanf("%d",&m)!=EOF&&m!=0)
+	{
+		scanf("%ld",&A);
+
+		scanf("%ld",&B);
+
+		while(S.empty()!=1)
+		{
+			S.pop();
+		}
+
+		temp=A+B;
+
+		while(temp>=1)
+		{
+			x=temp%m;
+
+			temp/=m;
+
+			S.push(x);
+		}
+
+		while(S.empty()!=1)
+		{
+			x=S.top();
+
+			S.pop();
+
+			cout<<x;
+		}
+
+		cout<<endl;
+	}
+}

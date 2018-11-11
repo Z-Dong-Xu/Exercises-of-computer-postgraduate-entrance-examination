@@ -1,0 +1,85 @@
+#include <iostream.h>
+#include <iomanip.h>
+
+#define MAX 100
+
+int X(int num[],int n);
+
+void main ()
+{
+	int a[MAX];
+
+	int M ,N ,n ,i ,temp ,flag=0;
+
+	cout<<"输入"<<endl;
+
+	cin>>M>>N>>n;
+
+	i=0;
+
+	while(i<=n)
+	{
+		a[i]=M/N;
+		temp=M%N;
+		temp*=10;
+		M=temp;
+		if(temp==0)
+		{
+			i++;
+			flag=2;
+			break;
+		}
+		if(X(a,i)==1)
+		{
+			flag=1;
+			
+			break;
+		}
+		i++;
+	}
+	
+	cout<<"M/N=";
+	switch(flag)
+	{
+	case(0):for(temp=1;temp<i;temp++)
+			{
+				cout<<a[temp];
+			}
+			cout<<"   循环周期无限长"<<endl;
+			break;
+	case(1):for(temp=1;temp<i;temp++)
+			{
+				cout<<a[temp];
+			}
+			cout<<"   从第"<<i-1<<"位开始循环"<<endl;
+			break;
+	case(2):for(temp=1;temp<i;temp++)
+			{
+				cout<<a[temp];
+			}
+			cout<<"   可以除尽"<<endl;
+			break;
+	}
+
+	cout<<endl;
+
+
+}
+
+int X(int num[],int n)
+{
+	if(n<2)
+	{
+		return 0;
+	}
+
+
+	if(num[n]==num[n-1])
+	{
+		return 1;
+	}
+	else 
+	{
+		return 0;
+	}
+}
